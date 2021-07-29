@@ -1,7 +1,7 @@
 ---
 title: API Gateway for Data Services Cloud Console
 date: 2021-07-29T14:28:17.779Z
-featuredBlog: true
+featuredBlog: false
 priority: 1
 author: Ron Dharma
 authorimage: /img/dscc-high-level-diagram.jpg
