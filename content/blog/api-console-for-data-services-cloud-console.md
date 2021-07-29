@@ -11,4 +11,6 @@ thumbnailimage: /img/dscc-icon.png
 >
 > To access the API console, user must login into the [GreenLake Common Cloud](https:\common.cloud.hpe.com), and deployed the Data Services Common Cloud Console Application into the organization that is associated with the user account. The **APIs** Gateway console will be available in the **Manage Account** menu.
 >
-> ![](/img/how-to-get-to-api-gateway.png "Menu ")
+> ![](/img/how-to-get-to-api-gateway.png "GreenLake Common Cloud Menu")
+>
+> ![](/img/dscc-api-gateway.png)
