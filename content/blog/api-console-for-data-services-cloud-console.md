@@ -6,6 +6,8 @@ priority: 1
 author: Ron Dharma
 authorimage: /img/dscc-high-level-diagram.jpg
 thumbnailimage: /img/dscc-icon.png
+tags:
+  - data-services-cloud-console
 ---
 > ## Accessing the API Gateway Console
 >
