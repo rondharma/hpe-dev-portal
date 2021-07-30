@@ -22,3 +22,5 @@ tags:
 > 3. Link to API documentation. 
 >
 > ![API-Gateway](/img/dscc-api-gateway.png "DSCC API Gateway")
+>
+> ![](/img/manage-api.jpg "Manage Gateway")
