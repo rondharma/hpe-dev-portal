@@ -27,8 +27,6 @@ The API Gateway provides the following operations:
 
 
 
-![](/img/access-token-url.jpg)
-
 ![API Menu](/img/manage-api.jpg "Manage Gateway")
 
 ![](/img/access-token-url.jpg)
