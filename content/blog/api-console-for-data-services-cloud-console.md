@@ -25,8 +25,10 @@ The API Gateway provides the following operations:
 
 ### Manage API client Applications
 
-
+![](/img/api-gateway-menu-no-account.jpg)
 
 ![API Menu](/img/manage-api.jpg "Manage Gateway")
+
+
 
 ![](/img/access-token-url.jpg)
