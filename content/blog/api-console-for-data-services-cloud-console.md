@@ -25,10 +25,12 @@ The API Gateway provides the following operations:
 
 ### Manage API client Applications
 
+Each of the API client Applications Connection creates the relationship between the client and server (application)
+
 ![](/img/api-gateway-menu-no-account.jpg)
 
-![API Menu](/img/manage-api.jpg "Manage Gateway")
+Given that there is no client applications created, user will press the generate the client credentials for 1st time.
 
-
+![](/img/generate-1st-client-credentials.jpg "Generate Client Credentials 1st time")
 
 ![](/img/access-token-url.jpg)
