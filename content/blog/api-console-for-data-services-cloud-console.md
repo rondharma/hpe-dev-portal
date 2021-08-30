@@ -9,6 +9,12 @@ thumbnailimage: ""
 tags:
   - data-services-cloud-console
 ---
+## Process to authenticate for obtaining the access token properly
+
+This Cloud Console Framework plugin-in ensure the security for authentication and authorization of the application that will integrate with the Data Services Cloud Console. The access token have a limited lifetime (about 720 seconds or 2 hours), and the application must be using the refresh API token and the refresh API to obtain the valid access tokens
+
+![Access API process](/img/api-access-token-complete-path.png "Process to authenticate and to obtain secure access ")
+
 ## Accessing the API Gateway Console
 
 To access the API console, user must login into the [GreenLake Common Cloud](https:\common.cloud.hpe.com), and deployed the Data Services Common Cloud Console Application into the organization that is associated with the user account. The **APIs** Gateway console will be available in the **Manage Account** menu.
