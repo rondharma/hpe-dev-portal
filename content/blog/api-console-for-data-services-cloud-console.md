@@ -45,6 +45,10 @@ Note that to create the credentials for the OAuth, you have to provide the appli
 
 Once the Create Credential is selected, the following information about the OAuth will be shown.
 
-![](/img/api-client-credential-created.png)
+![](/img/api-client-credential-created.png "Credentials Created Close")
 
 After closing the credential creation menu, user can observe the created API Client Credentials
+
+![](/img/application-credential-created-prior-shown.png "API Client Credentials are created")
+
+Clicking on the down arrow, user can generate the access token required to use the API.
