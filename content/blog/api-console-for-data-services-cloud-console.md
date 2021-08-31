@@ -37,6 +37,6 @@ Each of the API client Applications Connection creates the relationship between 
 
 Given that there is no client applications created, user will press the generate the client credentials for 1st time.
 
-![](/img/generate-1st-client-credentials.jpg "Generate Client Credentials 1st time")
+![Create Credential no input yet](/img/create-credential-prior.png "Generate Client Credentials 1st time")
 
 ![](/img/access-token-url.jpg)
