@@ -52,3 +52,5 @@ After closing the credential creation menu, user can observe the created API Cli
 ![](/img/application-credential-created-prior-shown.png "API Client Credentials are created")
 
 Clicking on the down arrow, user can generate the access token required to use the API.
+
+![](/img/api-client-credential-get-access-token.png)
