@@ -53,4 +53,16 @@ After closing the credential creation menu, user can observe the created API Cli
 
 Clicking on the down arrow, user can generate the access token required to use the API.
 
-![](/img/api-client-credential-get-access-token.png)
+![](/img/api-client-credential-get-access-token.png "Time to obtain the Access Token")
+
+Access token will then can be obtained
+
+![](/img/create-credential-prior.png "New Menu to Generate Access Token")
+
+New menu
+
+![](/img/generate-access-token-with-secret.png "Use the client secret to generate Access Token")
+
+Copy the Access Token for the API usage.
+
+![](/img/access-token-created-and-close.png "Access Token Generated and Consumed")
