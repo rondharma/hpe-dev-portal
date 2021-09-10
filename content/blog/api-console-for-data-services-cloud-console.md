@@ -11,7 +11,9 @@ tags:
 ---
 ## Authentication Process to obtain the Access Token
 
-This Cloud Console Framework plugin-in ensure the security for authentication and authorization of the application that will integrate with the Data Services Cloud Console. The access token have a limited lifetime (about 720 seconds or 2 hours), and the application must be using the refresh API token and the refresh API to obtain the valid access tokens
+Data Services Cloud Console public API use the HPE GreenLake OAuth 2.0 third party authorization framework on behalf of the resource owner (
+
+. The access token have a limited lifetime (about 720 seconds or 2 hours), and the application must be using the refresh API token and the refresh API to obtain the valid access tokens
 
 ![Access API process](/img/api-access-token-complete-path.png "Process to authenticate and to obtain secure access ")
 
