@@ -9,7 +9,7 @@ thumbnailimage: ""
 tags:
   - data-services-cloud-console
 ---
-## Process to authenticate for obtaining the access token properly
+## Authentication Process to obtain the Access Token
 
 This Cloud Console Framework plugin-in ensure the security for authentication and authorization of the application that will integrate with the Data Services Cloud Console. The access token have a limited lifetime (about 720 seconds or 2 hours), and the application must be using the refresh API token and the refresh API to obtain the valid access tokens
 
