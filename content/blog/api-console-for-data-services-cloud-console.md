@@ -11,9 +11,9 @@ tags:
 ---
 ## Authentication Process to obtain the Access Token
 
-Data Services Cloud Console public API use the HPE GreenLake OAuth 2.0 third party authorization framework on behalf of the resource owner (
+Data Services Cloud Console public API use the HPE GreenLake OAuth 2.0 third party authorization framework on behalf of the resource owner (DSCC user)
 
-. The access token have a limited lifetime (about 720 seconds or 2 hours), and the application must be using the refresh API token and the refresh API to obtain the valid access tokens
+The access token have a limited lifetime (about 720 seconds or 2 hours), and the application must be using the refresh API token and the refresh API to obtain the valid access tokens
 
 ![Access API process](/img/api-access-token-complete-path.png "Process to authenticate and to obtain secure access ")
 
