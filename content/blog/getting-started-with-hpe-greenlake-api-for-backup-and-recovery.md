@@ -24,4 +24,13 @@ The above figure shows the example of the downloaded backup-and-recovery v1beta1
 
 ## API Versioning
 
-This set of APIs is released with two different specifications which are identified as revision v1alpha1 and v1beta1 at the time of introduction in March 2024. Moving forward, the API will be updated to next revision toward the long-term release version. As each individual API is updated, there will also be more capabilities added to any of the resources identified under this set of APIs.  For information about update stages, and deprecation, please follow the HPE GreenLake Developer Portal Versioning [guide](https://developer.greenlake.hpe.com/docs/greenlake/guides/public/standards/versioning_basics/). You can expect that the API categorized as v1alpha1 will be updated within a short time; hence, I recommend for monitoring any announcement of the next revision of APIs for Backup and Recovery in this documentation [guide](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/guide/).
+This set of APIs is released with two different specifications which are identified as revision v1alpha1 and v1beta1 at the time of introduction in March 2024. Moving forward, the API will be updated to next revision toward the long-term release version. As each individual API is updated, there will also be more capabilities added to any of the resources identified under this set of APIs.  For information about update stages, and deprecation, please follow the HPE GreenLake Developer Portal Versioning [guide](https://developer.greenlake.hpe.com/docs/greenlake/guides/public/standards/versioning_basics/). You can expect that the API categorized as v1alpha1 will be updated within a short time; hence, I recommend for monitoring any announcement of the next revision of APIs for Backup and Recovery in this documentation [guide](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/guide/). 
+
+**Note:** At the time of release of March 2024, all of resources for HPE GreenLake API for Backup and Recovery are limited to data protection of on-premises assets. The manipulation of the cloud assets will be made available in the next release.
+
+Below diagram display those components that correspond to the list of on-premises resources:
+
+1. Data-Orchestrator.
+2. Protection-Store-Gateway.
+3. StoreOnce.
+4. Protection-Stores.
