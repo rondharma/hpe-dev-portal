@@ -29,6 +29,7 @@ This set of APIs is released with two different specifications which are identif
 **Note:** At the time of release of March 2024, all of resources for HPE GreenLake API for Backup and Recovery are limited to data protection of on-premises assets. The manipulation of the cloud assets will be made available in the next release.
 
 Below diagram display those components that correspond to the list of on-premises resources:
+
 1. Data-Orchestrator.
 2. Protection-Store-Gateway.
 3. StoreOnce.
