@@ -413,3 +413,35 @@ The steps required to apply the protection policy against a virtual machine:
    }
 }
 ```
+
+3. In the figure below, I used HPE GreenLake API for Backup and Recovery **POST /backup-recovery/v1beta1/protection-jobs** with the body JSON structure from the above so that I could associate the protection policy against a virtual machine. This one POST API execution completed and returned Status 0x200 with a response. The response from this API execution contained body that provided same JSON construct as the request body, with exception of the addition of multiple keys of ids. This information will be required for my next example which is to trigger a backup (run now) of this protection policy against a virtual machine.
+
+![API to apply protection policy against the VM](/img/api-applying-the-protection-jobs-against-a-vm.png)
+
+4. The API execution was executed successfully. I validated this completion using the task id that I obtained from the response headers as shown above, I issued the GET /data-services/v1beta1/async-operations/:id to obtain the final status of the REST API execution.  
+   **Note**: that that the execution of this API will trigger a protection execution right after the execution of this API completed.
+
+![Task list to display completion of the application of protection policy.](/img/api-async-on-post-protection-stores.png)
+
+### Triggering a protection
+
+
+Once the protection policy named "VMware create three tiers" was bound to the virtual machine as shown above, I then issued a trigger to create cloud protection against the virtual machine “0-Linux-Demo-VM02” to create one-off cloud-protection. This example below also provides some idea on validating whether the protection completed properly.
+
+
+The below list detailed the required steps:
+
+1. I figured out the protection-jobs that is associated with the cloud backup of the virtual machine “0-Linux-Demo-VM02.” I used HPE GreenLake [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList/)for Backup and Recovery **GET /backup-recovery/v1beta1/protection-jobs** and **filter “assetInfo/id eq {VM-id}”** associated with the virtual-machine as shown below. Note that the variable {vmId} contained the value of the virtual machine id as discovered in previous step, namely "<virtual-machine-id>". The response body’s JSON structure contained the id of the protection jobs associated with “0-Linux-Demo-VM02.”
+   Parameters used for this API execution:
+   •	**filter = assetInfo/id eq <virtual-machine-id>**
+   •	**select = assetInfo,id,operational,protections**
+
+![API to figure out protection-jobs](/img/api-to-figure-out-protection-jobs.png)
+
+
+
+2. This use case is equivalent to run now button at the schedule of the “0-Linux-Demo-V02” on the selected cloud protection as shown in below figure. After clicking “Run Now” button, a cloud protection will commence against the virtual machine, a recovery point is going to be created at the cloud protection store.
+
+![](/img/gui-run-now-cloud-protection.png)
+
+The GreenLake API to accomplish the use case above was POST /backup-recovery/v1beta1/protection-jobs/:id/run, and the documentation of this API also list the required JSON structure for the request body. Note that there was a key called “fullBackup” inside the request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. The below figure shows an example was the execution of run now without full backup protection of the third schedule which is cloud protection of this virtual machine.
