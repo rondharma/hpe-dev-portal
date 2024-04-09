@@ -111,3 +111,20 @@ The list of the steps to perform this use case using GreenLake API
 For reference, I went into the Protection Stores menu as shown in the below figure to show that HPE GreenLake Backup and Recovery confirmed that the desired protection store was available.
 
 ![Validating cloud protection store has been created](/img/ui-validated-cloud-protection-store-completed.png)
+
+
+
+### Creating a Protection-Policy
+
+
+
+One of the common use-case that every user of HPE GreenLake Backup and Recovery will deploy is the creation of a protection-policy. This resource is important because it sets up the schedule for creation of recovery point; additionally, it sets up the flow of a recovery point from a primary storage to a storage snapshot, to on-premises protection-store and eventually to the cloud protection-store. 
+Protection policies contain several different components:
+
+1. A Schedule that contains the frequency for creation of the copy and time to retain the copies.
+2. Protection store where the copies are stored: snapshot (in the primary array), on-premises store, and cloud store.
+3. Length of time when the copy is being locked to satisfy immutability.
+4. The prescript information prior to the creation of the copy.
+5. The postscript information after the creation of the copy. 
+
+To simplify this example, I created a three-tier protection-policy for VMware as depicted by this snippet from the protection policy’s menu.
