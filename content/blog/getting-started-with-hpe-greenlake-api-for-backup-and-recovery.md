@@ -488,12 +488,20 @@ API used for this: **GET /virtualization/v1beta1/virtual-machines?sort=name desc
 
 > 3b. To obtain the hypervisor Network Id that is required to recover the recovery point into a new virtual machine, I have to discover the hypervisor id. The API used for this: 
 >
-> **GET virtualization/v1beta1/hypervisor-managers?select=name,id,state,status,dataOrchestratorInfo,services,hypervisorManagerType,releaseVersion&filter=state eq "OK" and status eq "OK" and name eq "vCenter Name"**
+> **GET /virtualization/v1beta1/hypervisor-managers?select=name,id,state,status,dataOrchestratorInfo,services,hypervisorManagerType,releaseVersion&filter=state eq "OK" and status eq "OK" and name eq "vCenter Name"**
 
 ![API to get hypervisorId](/img/api-obtain-hypervisor-id.png)
 
-> 3c. To set the virtual machine network to the correct network port group, I glanced into the virtual machine 0-Linux-Demo-V02 that exist in that same network port group “Mgmt-DPortGroup” and obtain the network id. Currently, this API was not available yet as part of the March 2024 release, but this API surely will be available in near future. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this API:
+> 3c. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. Currently, this API was not available yet as part of the March 2024 release, but this API surely will be available in near future. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this API: 
 >
 > **GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'**
 
 ![](/img/api-to-get-the-network-id.png)
+
+4. After I obtained the parameters that were required to build the request body to recover a cloud recovery point from “0-Linux-Demo-VM02’, I constructed the JSON request body as shown in the below figure. To restore the recovery points into a new virtual machine, the restoreType key of the request body JSON structure was set to “ALTERNATE” as shown in the below figure. I also provided the new virtual machine name after the recovery, “0-Linux-Demo-VN02-2-05-04-2024_05:48_PM”. The API used for this: **POST /backup-recovery/v1beta1/virtual-machines/{{vmId}}/restore**
+
+![API to recover a cloud protection copy from a VM](/img/api-restoring-a-cloud-protection-recovery-point.png)
+
+
+
+5. To validate that the recovery was completed, and I tracked the progress from the response using the async-operations API as shown below. The API used for this: **GET /data-services/v1beta1/async-operations/:id?select=associatedResources,createdAt,endedAt,error,displayName,healthStatus,id,customerId,progressPercent,name,type,state**
