@@ -432,13 +432,12 @@ Once the protection policy named "VMware create three tiers" was bound to the vi
 The below list detailed the required steps:
 
 1. I figured out the protection-jobs that is associated with the cloud backup of the virtual machine “0-Linux-Demo-VM02.” I used HPE GreenLake [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList/)for Backup and Recovery **GET /backup-recovery/v1beta1/protection-jobs** and **filter “assetInfo/id eq {VM-id}”** associated with the virtual-machine as shown below. Note that the variable {vmId} contained the value of the virtual machine id as discovered in previous step, namely "<virtual-machine-id>". The response body’s JSON structure contained the id of the protection jobs associated with “0-Linux-Demo-VM02.”
-   Parameters used for this API execution:
+
+Parameters used for this API execution:
    •	**filter = assetInfo/id eq <virtual-machine-id>**
    •	**select = assetInfo,id,operational,protections**
 
 ![API to figure out protection-jobs](/img/api-to-figure-out-protection-jobs.png)
-
-
 
 2. This use case is equivalent to run now button at the schedule of the “0-Linux-Demo-V02” on the selected cloud protection as shown in below figure. After clicking “Run Now” button, a cloud protection will commence against the virtual machine, a recovery point is going to be created at the cloud protection store.
 
