@@ -419,7 +419,7 @@ The steps required to apply the protection policy against a virtual machine:
 
 ![API to apply protection policy against the VM](/img/api-applying-the-protection-jobs-against-a-vm.png)
 
-4. The API execution was executed successfully. I validated this completion using the task id that I obtained from the response headers as shown above,\
+4. The API execution was executed successfully. I validated this completion using the task id that I obtained from the response headers as shown above. The API used for this: **GET /data-services/v1beta1/async-operations/{{taskId}}**\
    **Note**: that that the execution of this API will trigger a protection execution right after the execution of this API completed.
 
 ![Task list to display completion of the application of protection policy.](/img/api-async-on-post-protection-stores.png)
@@ -446,7 +446,7 @@ Parameters used for this API execution:
 
 The GreenLake API to accomplish the use case above was **POST /backup-recovery/v1beta1/protection-jobs/:id/run**, and the documentation of this [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobRun/)also list the required JSON structure for the request body. Note that there was a key called **“fullBackup”** inside the request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. The below figure shows an example was the execution of run now without full backup protection of the third schedule which is cloud protection of this virtual machine.
 
-Parameters used for this API:
+The API used for this:
 
 **{:id} = {protection jobs id for 0-Linux-Demo-VM02}** that is shown from the above API response id. The value will be entered from the parameter of this API in this manner: **POST /backup-recovery/v1beta1/protection-jobs/<protection-jobs-id>/run.**
 
@@ -454,7 +454,7 @@ Parameters used for this API:
 
 4. The result from the API execution above can be validated from the API /data-services/v1beta1/async-operations/:id using the task id obtained from the above response header.
 
-Parameters used for this API:
+The API used for this:
 
 **G﻿ET /data-services/v1beta1/async-operations/{{taskId}}**
 
