@@ -505,3 +505,9 @@ API used for this: **GET /virtualization/v1beta1/virtual-machines?sort=name desc
 
 
 5. To validate that the recovery was completed, and I tracked the progress from the response using the async-operations API as shown below. The API used for this: **GET /data-services/v1beta1/async-operations/:id?select=associatedResources,createdAt,endedAt,error,displayName,healthStatus,id,customerId,progressPercent,name,type,state**
+
+![Task Id confirming the completion of the recovery](/img/task-display-recovery-is-completed.png)
+
+At the end, I went to the vCenter console to validate that the virtual machine 0-Linux-Demo-VN02-2-05-04-2024_05:48_PM was indeed part of the virtual machines inventory.
+
+![vCenter display the VM recovery completed](/img/the-vcenter-display-the-recovered-vm.png)
