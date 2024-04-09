@@ -112,11 +112,7 @@ For reference, I went into the Protection Stores menu as shown in the below figu
 
 ![Validating cloud protection store has been created](/img/ui-validated-cloud-protection-store-completed.png)
 
-
-
 ### Creating a Protection-Policy
-
-
 
 One of the common use-case that every user of HPE GreenLake Backup and Recovery will deploy is the creation of a protection-policy. This resource is important because it sets up the schedule for creation of recovery point; additionally, it sets up the flow of a recovery point from a primary storage to a storage snapshot, to on-premises protection-store and eventually to the cloud protection-store. 
 Protection policies contain several different components:
@@ -128,3 +124,117 @@ Protection policies contain several different components:
 5. The postscript information after the creation of the copy. 
 
 To simplify this example, I created a three-tier protection-policy for VMware as depicted by this snippet from the protection policy’s menu.
+
+![3 Tiers protection policy ](/img/backup-protection-policy-with-3-tiers.png)
+
+The list of the steps to create this protection policy:
+
+1. From the figure below, inside the protection store gateways menu, I discovered the serial number of the protection-store gateway as the filtering parameter to obtain the protection store gateway instance. 
+
+![PSG UI](/img/psg-ui-to-show-the-serial-no.png)
+
+2. Afterward, I used GET /backup-recovery/v1beta1/protection-store-gateways [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreGatewaysList/)to figure out the protection-store-gateway id that is associated with the protection-stores that would be incorporated into the protection-policy.
+
+![API show registered PSG](/img/api-display-registered-psg.png)
+
+3. From the figure below, I used GET /backup-recovery/v1beta1/protection-stores [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreList/)to obtain the protection-store id for both the on-premises protection store and the cloud protection store. To display related protection-stores to the protection storage gateway id, I provided the API parameter of filter to list the protection-store associated with the id for protection storage gateway of **“<onprem-protection-store-id>”**.  The filter parameter that I used are **protectionStoreType eq 'ON_PREMISES'** and **storageSystemInfo/id eq 'protection-store-gateway-id'**. Additionally, I used the following select parameter: **name,displayName,id,status,state,protectionStoreType** to provide shorter response to simplify the discovery of the protection-store on-premises.
+
+![API to obtain the onpremises protection store id](/img/api-to-get-onpremises-protection-store-id.png)
+
+4. I repeat the same execution of the GET /backup-recovery/v1beta1/protection-stores to obtain the **“<onprem-protection-store-id>”**. To accomplish that, I used the following filter: **protectionStoreType eq 'CLOUD' and storageSystemInfo/id eq “<protection-store-gateway-id>”**.  Additionally, I also used the select parameter: **name,displayName,id,status,state,protectionStoreType** to provide shorter response for simpler discovery  of the protection-store-id in the cloud.
+
+![API to obtain cloud protection store id](/img/api-discover-cloud-protection-store-id.png)
+
+5. For the next step, I created a request body JSON structure that represents the protection policy schedule and each of the protection stores. Inside this JSON structures for request body, I defined the three objects that represent the SNAPSHOT, BACKUP (on-premises), CLOUD_BACKUP. Note that this structure can be expanded or contracted depending on the required backup strategy. The SNAPSHOT object did not require **<protection-store-Id>** as that recovery points will exist inside the primary storage array. This request JSON body structure was required to create the protection policy using HPE GreenLake [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/)POST /backup-recovery/v1beta1/protection-policies. 
+
+   >  ***NOTE:*** I didn’t include objects for immutability, prescript, and postscript into the JSON structure. If it’s not intended, you don’t need to include unused key-pair values into the JSON structure. Additionally, the SNAPSHOT object does no require a **protectionStoreId**. 
+
+   The below figure shows JSON structure for request body of POST /backup-recovery/v1beta1/protection-policies for the creation of protection-policy as intended.
+
+```json
+{
+  "name": "VMware create three tiers",
+  "description": "Snapshot-local-cloud",
+  "protections": [
+    {
+      "type": "SNAPSHOT",
+      "schedules": [
+        {
+          "scheduleId": 1,
+          "name": "Array_Snapshot_1",
+          "namePattern": {
+            "format": "Array_Snapshot_{DateFormat}"
+          },
+          "expireAfter": {
+            "unit": "DAYS",
+            "value": 1
+          },
+          "schedule": {
+            "recurrence": "HOURLY",
+            "repeatInterval": {
+              "every": 4
+            },
+            "activeTime": {
+              "activeFromTime": "00:00",
+              "activeUntilTime": "23:59"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "type": "BACKUP",
+      "protectionStoreId": "<onprem-protection-store-id>",
+      "schedules": [
+        {
+          "scheduleId": 2,
+          "name": "On-Premises_Protection_Store_2",
+          "sourceProtectionScheduleId": 1,
+          "namePattern": {
+            "format": "On-Premises_Protection_Store_{DateFormat}"
+          },
+          "expireAfter": {
+            "unit": "DAYS",
+            "value": 3
+          },
+          "schedule": {
+            "recurrence": "DAILY",
+            "repeatInterval": {
+              "every": 1
+            },
+            "startTime": "00:00"
+          }
+        }
+      ]
+    },
+    {
+      "type": "CLOUD_BACKUP",
+      "protectionStoreId": "<cloud-protection-store-id>",
+      "schedules": [
+        {
+          "scheduleId": 3,
+          "name": "HPE_Cloud_Protection_Store_3",
+          "sourceProtectionScheduleId": 2,
+          "namePattern": {
+            "format": "HPE_Cloud_Protection_Store_{DateFormat}"
+          },
+          "expireAfter": {
+            "unit": "WEEKS",
+            "value": 1
+          },
+          "schedule": {
+            "recurrence": "DAILY",
+            "repeatInterval": {
+              "every": 2
+            },
+            "startTime": "00:00"
+          }
+        }
+      ]
+    }
+  ],
+  "applicationType": "VMWARE"
+}
+```
+
+6. Execute the creation of the protection policies using the GreenLake API for Backup and Recovery POST /backup-recovery/v1beta1/protection-policies, and I used the above JSON structure in the request body. This is a special POST API execution where the response is returned immediately. The response of this API contained the body of JSON structure that will be useful to identify the protection-jobs such as the <protection-policies-id>
