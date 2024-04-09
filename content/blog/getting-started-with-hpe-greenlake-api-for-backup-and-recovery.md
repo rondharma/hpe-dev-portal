@@ -454,3 +454,7 @@ Parameters used for this API:
 4. The result from the API execution above can be validated from the API /data-services/v1beta1/async-operations/:id using the task id obtained from the above response header.
 
 ![API async-operations of execution of protection-jobs](/img/api-task-list-after-a-run-execution.png)
+
+The activities above were validated from the HPE GreenLake Backup and Recovery list of the recovery points as shown in the below figure.
+
+![GUI display the completed cloud protection run](/img/gui-cloud-run-now-completed-succesfully.png)
