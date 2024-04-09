@@ -6,6 +6,8 @@ authorimage: /img/face-portraitlarge.jpg
 thumbnailimage: /img/alletra-element-small.png
 disable: false
 ---
+![]()
+
 ## W﻿hat's new?
 
 Recently, a new set of REST APIs for HPE GreenLake for Backup and Recovery Services was introduced in the HPE GreenLake Developer [website](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/). This blog presents some information on how to consume this set of APIs and introduce some useful tips about using this set of APIs. This set of APIs provides capability for manipulation of resources made available by HPE GreenLake for Backup and Recovery services. Consequently, any customer can use these APIs to protect their data in hybrid cloud, as well as anyone can do, using the user interface for HPE GreenLake for Backup and Recovery in the HPE GreenLake console.  This set of API provides user capabilities to perform any of Create, Read, Update and Delete (CRUD) operations against HPE GreenLake Backup and Recovery resources such as: *data-orchestrator, protection store gateway, StoreOnce, protection-stores, protection-policies, snapshots, backups, on-premises assets (VM, DataStore, MSSQL, Storage Volumes).* There will be more resources that are going to be added into this set of APIs in the future releases that will cover *cloud service providers, and cloud assets*. For more information on how to use this HPE GreenLake for Backup and Recovery service, please visit the [website ](https://www.hpe.com/us/en/hpe-greenlake-backup-recovery.html)and the getting started [guide](https://support.hpe.com/hpesc/public/docDisplay?docLocale=en_US&docId=sd00003454en_us). 
@@ -480,10 +482,18 @@ API used for this: **GET /virtualization/v1beta1/virtual-machines?sort=name desc
 3. The last step is to use GreenLake API to recover the cloud protection into a VMware hypervisor at the datastore that was in that VMware cluster. There were several parameter keys required to be defined in the request Body for GreenLake API POST /backup-recovery/v1beta1/virtual-machines/:id/restore as displayed in below figure.
    The required parameters are “cluster id”, and “datastore id”, and the “network id” to associate the virtual machines. The steps shown below are the steps to obtain those values using the HPE GreenLake REST API for virtualization.
 
-> 3a. Obtain the datastore id and the cluster id from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into GreenLake API GET /virtualization/v1beta1/datastores. The API for this: **GET /virtualization/v1beta1/datastores?filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,id**
+> 3a. Obtain the **datastore id** and the **cluster id** from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into GreenLake API GET /virtualization/v1beta1/datastores. The API for this: **GET /virtualization/v1beta1/datastores?filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,id**
 
 ![API to obtain the cluster and datastore Ids](/img/api-obtain-cluster-and-datastore.png)
 
+> 3b. To obtain the hypervisor Network Id that is required to recover the recovery point into a new virtual machine, I have to discover the hypervisor id. The API used for this: 
+>
+> **GET virtualization/v1beta1/hypervisor-managers?select=name,id,state,status,dataOrchestratorInfo,services,hypervisorManagerType,releaseVersion&filter=state eq "OK" and status eq "OK" and name eq "vCenter Name"**
 
+![API to get hypervisorId](/img/api-obtain-hypervisor-id.png)
 
+> 3c. To set the virtual machine network to the correct network port group, I glanced into the virtual machine 0-Linux-Demo-V02 that exist in that same network port group “Mgmt-DPortGroup” and obtain the network id. Currently, this API was not available yet as part of the March 2024 release, but this API surely will be available in near future. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this API:
+>
+> **GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'**
 
+![](/img/api-to-get-the-network-id.png)
