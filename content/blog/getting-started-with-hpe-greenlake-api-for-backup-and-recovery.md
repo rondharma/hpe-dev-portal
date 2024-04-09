@@ -469,3 +469,19 @@ The activities above were validated from the HPE GreenLake Backup and Recovery l
 Each of the recovery points regardless of the location of store (array snapshot, On-Premises Protection-Store, or HPE Cloud Protection-Store) can be recovered using of GreenLake API: **POST /backup-recovery/v1beta1/virtual-machines/:id/restore.** This API requires a request body of JSON structure as documented in the HPE GreenLake developer website. In this blog post, I planned a demo of the steps to recover the virtual machine from a copy that had existed in the HPE Cloud Protection Store into the VMware cluster where the Protection Storage Gateway is hosted (recover as a new virtual machine). 
 
 API used for this: **GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name rq’0-Linux-Demo-VM02’&select=appType,id,name,type,guestinfo,protectionJobInfo&filter=name eq ‘0-Linux-Demo-VM02’**
+
+![API to discover backup for recovery of VM](/img/api-to-discover-vm-for-recovery.png)
+
+2. Obtain the Cloud Recovery Protection Id from the for the cloud protection recovery from the virtual machine using the GreenLake API GET /backup-recovery/v1beta1/virtual-machines/:id/backups given the virtual machine id. Copy the “{{backupId}}” from the response body from the below figure.
+   API used for this: **GET /backup-recovery/v1beta1/virtual-machines/{{vmId}}/backups?select=name,description,backupType,id**
+
+![API to obtain the backup Id of a cloud recovery point](/img/api-to-obtain-backup-id-for-recovery.png)
+
+3. The last step is to use GreenLake API to recover the cloud protection into a VMware hypervisor at the datastore that was in that VMware cluster. There were several parameter keys required to be defined in the request Body for GreenLake API POST /backup-recovery/v1beta1/virtual-machines/:id/restore as displayed in below figure.
+   The required parameters are “cluster id”, and “datastore id”, and the “network id” to associate the virtual machines. The steps shown below are the steps to obtain those values using the HPE GreenLake REST API for virtualization.
+
+> 3a. Obtain the datastore id and the cluster id from the datastore that accommodate the same datastore type, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into GreenLake API GET /virtualization/v1beta1/datastores.
+>
+> ![API to obtain the cluster and datastore Ids](/img/api-obtain-cluster-and-datastore.png)
+>
+>
