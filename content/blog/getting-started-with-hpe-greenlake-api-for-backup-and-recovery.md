@@ -22,7 +22,7 @@ The Backup and Recovery API specification files contain information that describ
 
 ![GLBR openapi spec](/img/backup-and-recovery-json-information.png "JSON open API spec example")
 
-The above figure shows the example of the downloaded backup-and-recovery v1beta1.json file from the Backup and Recovery API documentation [guide](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/guide/).
+*The above figure shows the example of the downloaded backup-and-recovery v1beta1.json file from the Backup and Recovery API documentation [guide](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/guide/).*
 
 ## API Versioning
 
@@ -38,3 +38,5 @@ Below diagram display those components that correspond to the list of on-premise
 4. Protection-Stores.
 
 ![GLBR architecture 1](/img/glbr-architecture-overview-1.png)
+
+*The above figure shows the resources that are part of the infrastructure to accommodate the data protection for HPE GreenLake for Backup and Recovery.*
