@@ -444,4 +444,13 @@ The below list detailed the required steps:
 
 ![](/img/gui-run-now-cloud-protection.png)
 
-The GreenLake API to accomplish the use case above was POST /backup-recovery/v1beta1/protection-jobs/:id/run, and the documentation of this API also list the required JSON structure for the request body. Note that there was a key called “fullBackup” inside the request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. The below figure shows an example was the execution of run now without full backup protection of the third schedule which is cloud protection of this virtual machine.
+The GreenLake API to accomplish the use case above was **POST /backup-recovery/v1beta1/protection-jobs/:id/run**, and the documentation of this [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobRun/)also list the required JSON structure for the request body. Note that there was a key called **“fullBackup”** inside the request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. The below figure shows an example was the execution of run now without full backup protection of the third schedule which is cloud protection of this virtual machine.
+
+Parameters used for this API:
+**{:id} = {protection jobs id for 0-Linux-Demo-VM02}** that is shown from the above API response id. The value will be entered from the parameter of this API in this manner: **POST /backup-recovery/v1beta1/protection-jobs/<protection-jobs-id>/run.**
+
+![API to execute a protection run](/img/api-to-execute-a-protection.png)
+
+4. The result from the API execution above can be validated from the API /data-services/v1beta1/async-operations/:id using the task id obtained from the above response header.
+
+![API async-operations of execution of protection-jobs](/img/api-task-list-after-a-run-execution.png)
