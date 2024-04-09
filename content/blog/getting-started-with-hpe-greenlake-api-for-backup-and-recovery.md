@@ -238,9 +238,10 @@ The list of the steps to create this protection policy:
 
 The figure below shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids obtained from different protection tiers:
 
-1. **SNAPSHOT: “\<snapshot-protection-id\>”**
-2. **ON-PREMISES: “\<onprem-protection-id\>”**
-3. **CLOUD: “\<cloud-protection-id\>”**
+> ID: “<protection-policies-id>”
+> SNAPSHOT: “<snapshot-protection-id>”
+> ON-PREMISES: “<onprem-protection-id>”
+> CLOUD: “<cloud-protection-id>”
 
 ```json
 {
