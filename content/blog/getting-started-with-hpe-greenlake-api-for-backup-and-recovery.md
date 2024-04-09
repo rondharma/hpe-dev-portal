@@ -42,7 +42,7 @@ The second part of the GreenLake API for Backup Recovery resources is the resour
 *The above figure display resources that are parts of the hypervisor and on-premises components that can be protected.*
 
 > ***NOTE:*** 
-> In the current HPE Developer website, there is a single resource categorized as v1alpha1 that will be used to register, unregister, and update the hypervisor-manager. The current supported hypervisor manager is VMware vCenter, and it contains the cluster, virtual machines, and datastore used for the source of data-protection. The hypervisor-manager enabled HPE GreenLake Backup and Recovery to discover the vCenter which control the assets for data protection. This a crucial discovery will lead to application of protection-policy, setup the schedule, assign the protection-store where the copy protections will be allocated, and rest of the data protection operations. 
+> In the current HPE Developer website, there is a single resource categorized as v1alpha1 that will be used to register, unregister, and update the hypervisor-manager. The current supported hypervisor-manager is VMware vCenter, and it contains the cluster, virtual machines, and datastore used for the source of data-protection. The hypervisor-manager enabled HPE GreenLake Backup and Recovery to discover the vCenter which control the assets for data protection. This a crucial discovery will lead to application of protection-policy, setup the schedule, assign the protection-store where the copy protections will be allocated, and rest of the data protection operations. 
 
 ### What about the components in HPE GreenLake Backup and Recovery that are not mentioned above?
 
@@ -56,7 +56,7 @@ Additionally, there is also a resource called a protection job that is not shown
 
 ![Protection jobs for scheduling and protection tiers](/img/protection-jobs-ui.png)
 
-*The above figure displays the protection jobs which are the resources available after a protection policy applied to a protection group of many assets or a single asset.*
+*The above figure displays the representation of protection jobs which are the resources available after a protection policy applied to a protection group of many assets or a single asset.*
 
 Beyond protection-jobs, there are recovery points (also known as copies). These are resources that used to represent a copy that is inside the protection store, and they are used to perform the recovery. Note that even though there are three different categories of recovery-points that are available in the protection policy, there are only two different resources. The first resource is called snapshots to represent copies that exist inside the storage array. The second resource is called backups to represent copies that exist inside the on-premises protection store such as Protection Store Gateway, and copies that exist inside the cloud protection store. The cloud protection store is repository that sits in the cloud public providers that are managed by HPE, and these can exist either in AWS or Azure. All of these recovery points exist in relation to the assets, where the recovery can be initiated using the HPE GreenLake API.
 
@@ -75,7 +75,7 @@ This set of virtualization APIs uses the same authorization and permission as th
 The interactive API reference documentation guide provides information about the parameters and request payload (body) key-pair values required for every available HPE GreenLake API for Backup and Recovery. Additionally, I am presenting some use cases with detail information on providing the correct parameters or building the correct request payload (body) key-pairs JSON structure required to achieve the use case.
 
 > ***NOTE:*** 
-> The below examples assumed that HPE GreenLake Backup and Recovery had been deployed, it is connected to an HPE array onboarded to HPE GreenLake, a VMware vCenter had been discovered, some virtual machines had been deployed and onboarded into HPE GreenLake Backup and Recovery. For more information on getting started with HPE GreenLake Backup and Recovery, please visit Getting Started guide on HPE support [website](https://support.hpe.com/hpesc/public/docDisplay?docLocale=en_US&docId=sd00003454en_us&page=GUID-F25ABD00-C36B-42D8-A443-82584EE8E35A.html).
+> The below examples assumed that HPE GreenLake Backup and Recovery had been deployed, it was connected to an HPE array onboarded to HPE GreenLake, a VMware vCenter had been discovered, some virtual machines had been deployed and onboarded into HPE GreenLake Backup and Recovery. For more information on getting started with HPE GreenLake Backup and Recovery, please visit Getting Started guide on HPE support [website](https://support.hpe.com/hpesc/public/docDisplay?docLocale=en_US&docId=sd00003454en_us&page=GUID-F25ABD00-C36B-42D8-A443-82584EE8E35A.html).
 
 ### Creating a cloud protection store
 
