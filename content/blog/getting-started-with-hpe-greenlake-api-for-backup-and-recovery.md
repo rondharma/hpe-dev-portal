@@ -31,11 +31,6 @@ This set of APIs is released with two different specifications which are identif
 
 The below diagram displays those components in the first part of the GreenLake API for Backup and Recovery. This first part of components consists of the resources that are considered as the infrastructure for HPE GreenLake for Backup and Recovery on-premises and at the cloud. These components must be deployed prior to operation of the HPE GreenLake for Backup and Recovery. The on-premises components consist of Protection Store Gateway VM or HPE StoreOnce (purpose built backup appliance). Additionally, the cloud components consist of the data services instance deployed at HPE GreenLake workspace, and the cloud protection store to contain the cloud recovery points (backups).  The information on getting started with HPE GreenLake for Backup and Recovery is available in the support [website](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00003102en_us&page=bar_overview_dscc.html)
 
-1. Data-Orchestrator.
-2. Protection-Store-Gateway.
-3. StoreOnce.
-4. Protection-Stores.
-
 ![GLBR architecture 1](/img/glbr-architecture-overview-1.png)
 
 *The above figure shows the resources that are part of the infrastructure to accommodate the data protection for HPE GreenLake for Backup and Recovery.*
@@ -47,7 +42,7 @@ The second part of the GreenLake API for Backup Recovery resources is the resour
 *The above figure display resources that are parts of the hypervisor and on-premises components that can be protected.*
 
 > ***NOTE:*** 
-> In the current HPE Developer website, there is a single resource categorized as v1alpha1 that will be used to register, unregister, and update the hypervisor-manager. The current supported hypervisor is VMware vCenter, and it contains the cluster, virtual machines, and datastore used for the source of data-protection. The hypervisor-manager enabled HPE GreenLake Backup and Recovery to discover the vCenter which control the assets for data protection. This a crucial discovery will lead to application of protection-policy, setup the schedule, assign the protection-store where the copy protections will be allocated, and rest of the data protection operations.
+> In the current HPE Developer website, there is a single resource categorized as v1alpha1 that will be used to register, unregister, and update the hypervisor-manager. The current supported hypervisor manager is VMware vCenter, and it contains the cluster, virtual machines, and datastore used for the source of data-protection. The hypervisor-manager enabled HPE GreenLake Backup and Recovery to discover the vCenter which control the assets for data protection. This a crucial discovery will lead to application of protection-policy, setup the schedule, assign the protection-store where the copy protections will be allocated, and rest of the data protection operations. 
 
 ### What about the components in HPE GreenLake Backup and Recovery that are not mentioned above?
 
@@ -361,5 +356,4 @@ The figure below shows the complete response JSON body from the above API that s
     "type": "backup-recovery/protection-policy",
     "updatedAt": "2024-04-05T03:28:03.000000Z"
 }
-
 ```
