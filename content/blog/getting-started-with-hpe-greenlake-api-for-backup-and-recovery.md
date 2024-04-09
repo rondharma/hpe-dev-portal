@@ -511,3 +511,11 @@ API used for this: **GET /virtualization/v1beta1/virtual-machines?sort=name desc
 At the end, I went to the vCenter console to validate that the virtual machine 0-Linux-Demo-VN02-2-05-04-2024_05:48_PM was indeed part of the virtual machines inventory.
 
 ![vCenter display the VM recovery completed](/img/the-vcenter-display-the-recovered-vm.png)
+
+## Summary
+
+
+This blog provides the introduction of the new set of REST API from the family of the APIs for data services on HPE Greenlake, namely **HPE GreenLake API for Backup and Recovery**. This set of API is documented at the HPE GreenLake for developer [website ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/)using interactive documentation based on OpenAPI version 3.1. Early in this blog post, I laid down the relationship of the resources in this HPE GreenLake API with the objects in the HPE GreenLake Backup and Recovery user interface. In this blog, I also introduced examples from several use cases associated with utilizing HPE GreenLake for Backup and Recovery to provide virtual machine protection from day one. The examples presented in this blog post provided some guides on using combination of the REST APIs that were announced in March 2024 to achieve the goal for protecting a virtual machine. All the execution for the examples were done using Postman API tool without any scripting language to encourage anyone to experiment with the family of REST API for data services on HPE GreenLake. 
+
+
+Please don’t hesitate to explore this new set of API for Cloud Data Services on HPE GreenLake and see how you can improve your agility in managing your data. Any questions on HPE GreenLake Data Services Cloud Console API? Please [join](https://developer.hpe.com/slack-signup) the **HPE Developer Slack Workspace**, and start a discussion in our [\#hpe-greenlake-data-services](https://hpedev.slack.com/archives/C02D6H623JP)
