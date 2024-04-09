@@ -238,10 +238,10 @@ The list of the steps to create this protection policy:
 
 The below figure shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids obtained from different protection tiers:
 
-1. **ID: “\<protection-policies-id\>**
-2. **SNAPSHOT: “\<snapshot-protection-id\>”**
-3. **ON-PREMISES: “\<onprem-protection-id\>”**
-4. **CLOUD: “\<cloud-protection-id\>”**
+1. **ID: “<protection-policies-id>**
+2. **SNAPSHOT: “<snapshot-protection-id>”**
+3. **ON-PREMISES: “<onprem-protection-id>”**
+4. **CLOUD: “<cloud-protection-id>”**
 
 ```json
 {
@@ -358,9 +358,16 @@ The below figure shows the complete response JSON body from the above API that s
 ```
 
 ### Applying protection policy to a Virtual Machine
-Next in the list of use cases for this blog post, I followed the progression for the day one activities required to protect a virtual machine which is applying this protection policy to a virtual machine (or any other assets)
+
+Next in the list of use cases for this blog post, I followed the progression for the day one activities required to protect a virtual machine which is applying this protection policy to a virtual machine (or any other assets).
 The steps required to apply the protection policy against a virtual machine:
-1. Obtain the values from virtual machine id, name, and type keys which were going to be used as the key-pair values required for the key assetInfo as shown in below figures. To obtain those, I used the HPE GreenLake API for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02” as shown in below figure.  Additionally, I used filter such as name, and select a bunch of keys as part of the execution the GET /virtualization/v1beta1/virtual-machines. 
+
+1. Obtain the values from **virtual machine id, name, and type keys** which were going to be used as the key-pair values required for the key **assetInfo** as shown in below figures. To obtain those, I used the HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/tag/virtual-machines/) for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02”  using following **GET /virtualization/v1beta1/virtual-machines?sort=name desc&select=appType,id,name,type,guestInfo,protectionJobInfo&filter=name eq '0-Linux-Demo-VM02'** 
+
+![API to find virtual-machines and it's properties](/img/api-find-virtual-machines.png)
+
+
+
 
 
 
