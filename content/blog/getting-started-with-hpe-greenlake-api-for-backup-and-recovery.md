@@ -237,12 +237,127 @@ The list of the steps to create this protection policy:
 }
 ```
 
-6. Execute the creation of the protection policies using the GreenLake API for Backup and Recovery POST /backup-recovery/v1beta1/protection-policies, and I used the above JSON structure in the request body. This is a special POST API execution where the response is returned immediately. The response of this API contained the body of JSON structure that will be useful to identify the protection-jobs such as the \<protection-policies-id\>
+6. Execute the creation of the protection policies using the GreenLake API for Backup and Recovery POST /backup-recovery/v1beta1/protection-policies, and I used the above JSON structure in the request body. This is a special POST API execution where the response is returned immediately. The response of this API contained the body of JSON structure that will be useful to identify the protection-jobs such as the <protection-policies-id>
 
 ![API to create protection policy](/img/api-to-create-protection-policy.png)
 
 The figure below shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids obtained from different protection tiers:
 
-1. **SNAPSHOT: “\<snapshot-protection-id\>”**
-2. **ON-PREMISES: “\<onprem-protection-id\>”**
-3﻿. **CLOUD: “\<cloud-protection-id\>”**
+1. **SNAPSHOT: “<snapshot-protection-id>”**
+2. **ON-PREMISES: “<onprem-protection-id>”**
+3. **CLOUD: “<cloud-protection-id>”**
+
+```json
+{
+    "assigned": false,
+    "description": "Snapshot-local-cloud",
+    "id": "<protection-policies-id",
+    "name": "VMware create three tiers",
+    "protections": [
+        {
+            "id": "<snapshot-protection-id>",
+            "schedules": [
+                {
+                    "scheduleId": 1,
+                    "name": "Array_Snapshot_1",
+                    "schedule": {
+                        "activeTime": {
+                            "activeFromTime": "00:00",
+                            "activeUntilTime": "23:59"
+                        },
+                        "recurrence": "HOURLY",
+                        "repeatInterval": {
+                            "every": 4
+                        }
+                    },
+                    "expireAfter": {
+                        "unit": "DAYS",
+                        "value": 1
+                    },
+                    "namePattern": {
+                        "format": "Array_Snapshot_{DateFormat}"
+                    }
+                }
+            ],
+            "type": "SNAPSHOT"
+        },
+        {
+            "id": "<onprem-protection-id>",
+            "schedules": [
+                {
+                    "scheduleId": 2,
+                    "sourceProtectionScheduleId": 1,
+                    "name": "On-Premises_Protection_Store_2",
+                    "schedule": {
+                        "recurrence": "DAILY",
+                        "repeatInterval": {
+                            "every": 1
+                        },
+                        "startTime": "00:00"
+                    },
+                    "expireAfter": {
+                        "unit": "DAYS",
+                        "value": 3
+                    },
+                    "namePattern": {
+                        "format": "On-Premises_Protection_Store_{DateFormat}"
+                    }
+                }
+            ],
+            "protectionStoreInfo": {
+                "id": "onprem-protectio-store-id",
+                "name": "Local_CDS-TPM-PSG#1",
+                "type": "backup-recovery/protection-store",
+                "resourceUri": "/backup-recovery/v1beta1/protection-stores/501a99e7-fb79-4fd7-89d5-a5dfb3441859",
+                "protectionStoreType": "ON_PREMISES"
+            },
+            "type": "BACKUP"
+        },
+        {
+            "id": “<cloud-protection-id>”,
+            "schedules": [
+                {
+                    "scheduleId": 3,
+                    "sourceProtectionScheduleId": 2,
+                    "name": "HPE_Cloud_Protection_Store_3",
+                    "schedule": {
+                        "recurrence": "DAILY",
+                        "repeatInterval": {
+                            "every": 2
+                        },
+                        "startTime": "00:00"
+                    },
+                    "expireAfter": {
+                        "unit": "WEEKS",
+                        "value": 1
+                    },
+                    "namePattern": {
+                        "format": "HPE_Cloud_Protection_Store_{DateFormat}"
+                    }
+                }
+            ],
+            "protectionStoreInfo": {
+                "id": "cloud-protection-store-id",
+                "name": "Cloud_CDS-TPM-PSGno1_USA, North Virginia",
+                "type": "backup-recovery/protection-store",
+                "region": "USA, North Virginia",
+                "resourceUri": "/backup-recovery/v1beta1/protection-stores/25611df9-f136-424b-b447-aa3a4887869f",
+                "protectionStoreType": "CLOUD"
+            },
+            "type": "CLOUD_BACKUP"
+        }
+    ],
+    "createdAt": "2024-04-05T03:28:03.000000Z",
+    "createdBy": {
+        "id": "<user-id>",
+        "name": "ronald.dharma@hpe.com"
+    },
+    "generation": 1,
+    "resourceUri": "/backup-recovery/v1beta1/protection-policies/f572ce6e-3470-4149-bb5b-530284bf2bc4",
+    "consoleUri": "/backup-and-recovery/protection-policies/f572ce6e-3470-4149-bb5b-530284bf2bc4",
+    "applicationType": "VMWARE",
+    "type": "backup-recovery/protection-policy",
+    "updatedAt": "2024-04-05T03:28:03.000000Z"
+}
+
+```
