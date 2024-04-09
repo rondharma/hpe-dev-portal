@@ -481,7 +481,9 @@ API used for this: **GET /virtualization/v1beta1/virtual-machines?sort=name desc
    The required parameters are “cluster id”, and “datastore id”, and the “network id” to associate the virtual machines. The steps shown below are the steps to obtain those values using the HPE GreenLake REST API for virtualization.
 
 > 3a. Obtain the datastore id and the cluster id from the datastore that accommodate the same datastore type, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into GreenLake API GET /virtualization/v1beta1/datastores.
->
-> ![API to obtain the cluster and datastore Ids](/img/api-obtain-cluster-and-datastore.png)
->
->
+
+![API to obtain the cluster and datastore Ids](/img/api-obtain-cluster-and-datastore.png)
+
+
+
+
