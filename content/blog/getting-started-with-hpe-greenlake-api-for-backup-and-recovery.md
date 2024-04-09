@@ -237,4 +237,12 @@ The list of the steps to create this protection policy:
 }
 ```
 
-6. Execute the creation of the protection policies using the GreenLake API for Backup and Recovery POST /backup-recovery/v1beta1/protection-policies, and I used the above JSON structure in the request body. This is a special POST API execution where the response is returned immediately. The response of this API contained the body of JSON structure that will be useful to identify the protection-jobs such as the <protection-policies-id>
+6. Execute the creation of the protection policies using the GreenLake API for Backup and Recovery POST /backup-recovery/v1beta1/protection-policies, and I used the above JSON structure in the request body. This is a special POST API execution where the response is returned immediately. The response of this API contained the body of JSON structure that will be useful to identify the protection-jobs such as the \<protection-policies-id\>
+
+![API to create protection policy](/img/api-to-create-protection-policy.png)
+
+The figure below shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids obtained from different protection tiers:
+
+1. **SNAPSHOT: “\<snapshot-protection-id\>”**
+2. **ON-PREMISES: “\<onprem-protection-id\>”**
+3﻿. **CLOUD: “\<cloud-protection-id\>”**
