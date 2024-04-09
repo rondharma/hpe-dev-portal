@@ -255,7 +255,9 @@ The figure below shows the complete response JSON body from the above API that s
     "name": "VMware create three tiers",
     "protections": [
         {
-            "id": "<snapshot-protection-id>",
+ ##
+            "id": "<snapshot-protection-id>", 
+ ##           
             "schedules": [
                 {
                     "scheduleId": 1,
