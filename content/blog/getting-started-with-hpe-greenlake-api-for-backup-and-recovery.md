@@ -81,7 +81,7 @@ The interactive API reference documentation guide provides information about the
 
 ### Creating a cloud protection store
 
-A protection store is the critical resource that is required to store the recovery points on-premises and in the cloud. The cloud protection stores are created on top of either the Protection Store Gateway or HPE StoreOnce because they are providing the connectivity to the cloud protection-store. To perform this use case, we will need to discover the StoreOnce and the storage location of the cloud protection store. As you can see now, we will be using the HPE GreenLake API for the data-services to discover the storage location of the cloud protection store. This example below displays the creation of the cloud protection store at HPE GreenLake protection store in Azure cloud storage.
+A protection store is the critical resource that is required to store the recovery points on-premises and in the cloud. The cloud protection stores are created on top of either the Protection Store Gateway or HPE StoreOnce;  because of the required connectivity to the cloud protection-store. To perform this use case, we will need to discover the StoreOnce and the storage location of the cloud protection store. As you can see now, we will be using the HPE GreenLake API for the data-services to discover the storage location of the cloud protection store. This example below displays the creation of the cloud protection store at HPE GreenLake protection store in Azure cloud storage.
 
 ![UI to create cloud protection in Azure](/img/ui-to-create-cloud-protection.png)
 
@@ -89,11 +89,11 @@ A protection store is the critical resource that is required to store the recove
 
 The list of the steps to perform this use case using GreenLake API
 
-1. Use the [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/StoreOncesList/)to discover the StoreOnce instance that can connect to the cloud protection store and select the id which will be used as the value for storageSystemId as shown in below JSON request body.
+1. Use the [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/StoreOncesList/)to discover the StoreOnce instance that can connect to the cloud protection store and copy the id which will be used as the value for storageSystemId as shown in below JSON request body. API for this: **GET /backup-recovery/v1beta1/storonces?limit=20&offset=0**
 
 ![Discover deployed StoreOnce to create cloud protection store](/img/api-discover-storeonce.png)
 
-2. Discover the cloud storage in the correct location from the list of the available storage location and copy the **storageLocationId** as shown in below JSON request body. The REST [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/data-services/public/openapi/data-services-public-v1beta1/operation/ListLocations/)that I used is **GET /data-services/v1beta1/storage-locations** part of HPE GreenLake data services API which is another set of APIs from the data services family of REST API. Note from the below figure that I used ***filter “backup-and-recovery” in capabilities*** to capture selected storage locations with the correct capability. The below figure shows information about the location (region) where the data will be stored; conversely, it’s located at “**Richmond**”, cloud service provide was “**AZURE**”, and cloud services provider identification is “**eastus2**”. 
+2. Next, I discovered the cloud storage at the correct location from the list of the available storage location and copy the storageLocationId as shown in below JSON request body. The discovery was done by using a HPE GreenLake API from different set of data services API family. Note from the below figure that I used filter “backup-and-recovery” in capabilities to capture selected storage locations with the correct capability. The below figure shows information about the location (region) where the data will be stored; conversely, it’s located at “Richmond”, cloud service provide was “AZURE”, and cloud services provider identification is “eastus2”. The REST API for this: **GET /data-services/v1beta1/storage-locations?filter=”backup-and-recovery” in capabilities**
 
 ![API to figure out the Azure storage location](/img/figure-out-storage-location.png)
 
@@ -502,8 +502,6 @@ API used for this: **GET /virtualization/v1beta1/virtual-machines?sort=name desc
 
 ![API to recover a cloud protection copy from a VM](/img/api-restoring-a-cloud-protection-recovery-point.png)
 
-
-
 5. To validate that the recovery was completed, and I tracked the progress from the response using the async-operations API as shown below. The API used for this: **GET /data-services/v1beta1/async-operations/:id?select=associatedResources,createdAt,endedAt,error,displayName,healthStatus,id,customerId,progressPercent,name,type,state**
 
 ![Task Id confirming the completion of the recovery](/img/task-display-recovery-is-completed.png)
@@ -514,8 +512,6 @@ At the end, I went to the vCenter console to validate that the virtual machine 0
 
 ## Summary
 
-
 This blog provides the introduction of the new set of REST API from the family of the APIs for data services on HPE Greenlake, namely **HPE GreenLake API for Backup and Recovery**. This set of API is documented at the HPE GreenLake for developer [website ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/)using interactive documentation based on OpenAPI version 3.1. Early in this blog post, I laid down the relationship of the resources in this HPE GreenLake API with the objects in the HPE GreenLake Backup and Recovery user interface. In this blog, I also introduced examples from several use cases associated with utilizing HPE GreenLake for Backup and Recovery to provide virtual machine protection from day one. The examples presented in this blog post provided some guides on using combination of the REST APIs that were announced in March 2024 to achieve the goal for protecting a virtual machine. All the execution for the examples were done using Postman API tool without any scripting language to encourage anyone to experiment with the family of REST API for data services on HPE GreenLake. 
-
 
 Please don’t hesitate to explore this new set of API for Cloud Data Services on HPE GreenLake and see how you can improve your agility in managing your data. Any questions on HPE GreenLake Data Services Cloud Console API? Please [join](https://developer.hpe.com/slack-signup) the **HPE Developer Slack Workspace**, and start a discussion in our [\#hpe-greenlake-data-services](https://hpedev.slack.com/archives/C02D6H623JP)
