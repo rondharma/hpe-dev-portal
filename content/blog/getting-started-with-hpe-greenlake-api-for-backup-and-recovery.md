@@ -357,7 +357,7 @@ The below figure shows the complete response JSON body from the above API that s
 }
 ```
 
-Applying protection policy to a Virtual Machine
+### Applying protection policy to a Virtual Machine
 Next in the list of use cases for this blog post, I followed the progression for the day one activities required to protect a virtual machine which is applying this protection policy to a virtual machine (or any other assets)
 The steps required to apply the protection policy against a virtual machine:
 1. Obtain the values from virtual machine id, name, and type keys which were going to be used as the key-pair values required for the key assetInfo as shown in below figures. To obtain those, I used the HPE GreenLake API for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02” as shown in below figure.  Additionally, I used filter such as name, and select a bunch of keys as part of the execution the GET /virtualization/v1beta1/virtual-machines. 
