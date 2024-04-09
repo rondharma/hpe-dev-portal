@@ -132,11 +132,11 @@ The list of the steps to create this protection policy:
 
 ![API show registered PSG](/img/api-display-registered-psg.png)
 
-3. From the figure below, I used **GET /backup-recovery/v1beta1/protection-stores** [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreList/)to obtain the protection-store id for both the on-premises protection store and the cloud protection store. To display related protection-stores to the protection storage gateway id, I provided the API parameter of filter to list the protection-store associated with the id for protection storage gateway of **“\<onprem-protection-store-id\>”**.  The filter parameter that I used are **protectionStoreType eq 'ON_PREMISES'** and **storageSystemInfo/id eq '\<protection-store-gateway-id\>'**. Additionally, I used the following parameter **select: name,displayName,id,status,state,protectionStoreType** to provide shorter response to simplify the discovery of the protection-store on-premises.
+3. From the figure below, I used **GET /backup-recovery/v1beta1/protection-stores** [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreList/)to obtain the protection-store id for both the on-premises protection store and the cloud protection store. To display related protection-stores to the protection storage gateway id, I provided the API parameter of filter to list the protection-store associated with the id for protection storage gateway of **“<onprem-protection-store-id>”**.  The filter parameter that I used are **protectionStoreType eq 'ON_PREMISES'** and **storageSystemInfo/id eq '<protection-store-gateway-id>'**. Additionally, I used the following parameter **select: name,displayName,id,status,state,protectionStoreType** to provide shorter response to simplify the discovery of the protection-store on-premises.
 
 ![API to obtain the onpremises protection store id](/img/api-to-get-onpremises-protection-store-id.png)
 
-4. I repeat the same execution of the **GET /backup-recovery/v1beta1/protection-stores** to obtain the **“\<cloud-protection-store-id\>”**. To accomplish that, I used the following **filter**: **protectionStoreType eq 'CLOUD' and storageSystemInfo/id eq “\<protection-store-gateway-id\>”**.  Additionally, I also used the  parameter **select: name,displayName,id,status,state,protectionStoreType** to provide shorter response for simpler discovery of the protection-store-id in the cloud.
+4. I repeat the same execution of the **GET /backup-recovery/v1beta1/protection-stores** to obtain the **“<cloud-protection-store-id>”**. To accomplish that, I used the following **filter**: **protectionStoreType eq 'CLOUD' and storageSystemInfo/id eq “<protection-store-gateway-id>”**.  Additionally, I also used the  parameter **select: name,displayName,id,status,state,protectionStoreType** to provide shorter response for simpler discovery of the protection-store-id in the cloud.
 
 ![API to obtain cloud protection store id](/img/api-discover-cloud-protection-store-id.png)
 
@@ -238,13 +238,10 @@ The list of the steps to create this protection policy:
 
 The below figure shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids obtained from different protection tiers:
 
- ID: “\<protection-policies-id\>”
-
- SNAPSHOT: “\<snapshot-protection-id\>”
-
- ON-PREMISES: “\<onprem-protection-id\>”
-
- CLOUD: “\<cloud-protection-id\>”
+1. **ID: “\<protection-policies-id\>**
+2. **SNAPSHOT: “\<snapshot-protection-id\>”**
+3. **ON-PREMISES: “\<onprem-protection-id\>”**
+4. **CLOUD: “\<cloud-protection-id\>”**
 
 ```json
 {
@@ -254,9 +251,7 @@ The below figure shows the complete response JSON body from the above API that s
     "name": "VMware create three tiers",
     "protections": [
         {
- ##
-            "id": "<snapshot-protection-id>", 
- ##           
+            "id": "<snapshot-protection-id>",           
             "schedules": [
                 {
                     "scheduleId": 1,
