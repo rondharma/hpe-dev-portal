@@ -83,7 +83,7 @@ The interactive API reference documentation guide provides information about the
 > ***NOTE:*** 
 > The below examples assumed that HPE GreenLake Backup and Recovery had been deployed, it was connected to an HPE array onboarded to HPE GreenLake, a VMware vCenter had been discovered, some virtual machines had been deployed and onboarded into HPE GreenLake Backup and Recovery. For more information on getting started with HPE GreenLake Backup and Recovery, please visit Getting Started guide on HPE support [website](https://support.hpe.com/hpesc/public/docDisplay?docLocale=en_US&docId=sd00003454en_us&page=GUID-F25ABD00-C36B-42D8-A443-82584EE8E35A.html).
 
-### Creating a cloud protection store
+## Creating a cloud protection store
 
 A protection store is the critical resource that is required to store the recovery points on-premises and in the cloud. The cloud protection stores are created on top of either the Protection Store Gateway or HPE StoreOnce;  because of the required connectivity to the cloud protection-store. To perform this use case, we will need to discover the StoreOnce and the storage location of the cloud protection store. As you can see now, we will be using the HPE GreenLake API for the data-services to discover the storage location of the cloud protection store. This example below displays the creation of the cloud protection store at HPE GreenLake protection store in Azure cloud storage.
 
@@ -114,7 +114,7 @@ For reference, I went into the Protection Stores menu as shown in the below figu
 
 ![Validating cloud protection store has been created](/img/ui-validated-cloud-protection-store-completed.png)
 
-### Creating a Protection-Policy
+## Creating a Protection-Policy
 
 One of the common use-case that every user of HPE GreenLake Backup and Recovery will deploy is the creation of a protection-policy. This resource is important because it sets up the schedule for creation of recovery point; additionally, it sets up the flow of a recovery point from a primary storage to a storage snapshot, to on-premises protection-store and eventually to the cloud protection-store. 
 Protection policies contain several components:
@@ -150,8 +150,6 @@ The list of the steps to create this protection policy:
 5. For the next step, I created a request body JSON structure that represents the protection policy schedule and each of the protection stores. Inside this JSON structures for request body, I defined the three objects that represent the SNAPSHOT, BACKUP (on-premises), CLOUD_BACKUP. Note that this structure can be expanded or contracted depending on the required backup strategy. The SNAPSHOT object did not require **"<protection-store-Id>"** as that recovery points will exist inside the primary storage array. This request JSON body structure was required to create the protection policy using HPE GreenLake [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/)**POST /backup-recovery/v1beta1/protection-policies.** 
 
 > ***NOTE:*** I didn’t include objects for immutability, prescript, and postscript into the JSON structure. If it’s not intended, you don’t need to include unused key-pair values into the JSON structure. Additionally, the SNAPSHOT object does no require a **protectionStoreId**. 
-
-
 
 ```json
 {
@@ -462,7 +460,7 @@ The activities above were validated from the HPE GreenLake Backup and Recovery l
 
 ![GUI display the completed cloud protection run](/img/gui-cloud-run-now-completed-succesfully.png)
 
-### Wow.. those were so cool! Can I recover a new virtual machine from that recovery point that I just created?
+## Wow.. those were so cool! Can I recover a new virtual machine from that recovery point that I just created?
 
 Each of the recovery points regardless of the location of store (array snapshot, On-Premises Protection-Store, or HPE Cloud Protection-Store) can be recovered using of GreenLake API: **POST /backup-recovery/v1beta1/virtual-machines/:id/restore.** This API requires a request body of JSON structure as documented in the HPE GreenLake developer website. In this blog post, I planned a demo of the steps to recover the virtual machine from a copy that had existed in the HPE Cloud Protection Store into the VMware cluster where the Protection Storage Gateway is hosted (recover as a new virtual machine). API used for this: 
 **GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-Linux-Demo-VM02’&select=appType,id,name,type,guestinfo,protectionJobInfo**
