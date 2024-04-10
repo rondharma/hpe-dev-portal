@@ -18,7 +18,7 @@ Recently, a new set of REST APIs for HPE GreenLake for Backup and Recovery Servi
 
 The specification of this API is publicized as OpenAPI specification in JSON format, and the specification is available for download from this [section ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/guide/)of the documentation as shown below. The specification follows the OpenAPI standard 3.1, and it contains all required information so that this JSON file can be consumed by any OpenAPI tools to provide client library, server mock, or documentation as described in this [OpenAPI ](https://tools.openapis.org/)Initiative.
 
-> ***NOTE:*** 
+> ***Note:*** 
 > There are two different sets of API spec that are downloadable from the documentation page of the Backup and Recovery in March 2024 release. The two sets represent the two versions of Backup and Recovery APIs that were made available for separate resources, namely **hypervisor-managers** and **rest of other resources** as shown in this picture below. To get into the page for downloading each of the OpenAPI specification file, please traverse the tree of guides on the left windows and select either page of the API versions.
 
 ![GLBR API documentation website](/img/backup-and-recovery-api-front-download-page.jpg "Front page for Backup & Recovery front page")
@@ -47,7 +47,7 @@ The second part of the GreenLake API for Backup Recovery resources is the resour
 
 *The above figure display resources that are parts of the hypervisor and on-premises components that can be protected.*
 
-> ***NOTE:*** 
+> ***Note:*** 
 > In the current HPE Developer website, there is a single resource categorized as v1alpha1 that will be used to register, unregister, and update the hypervisor-manager. The current supported hypervisor-manager is VMware vCenter, and it contains the cluster, virtual machines, and datastore used for the source of data-protection. The hypervisor-manager enabled HPE GreenLake Backup and Recovery to discover the vCenter which control the assets for data protection. This a crucial discovery will lead to application of protection-policy, setup the schedule, assign the protection-store where the copy protections will be allocated, and rest of the data protection operations. 
 
 ### What about the components in HPE GreenLake Backup and Recovery that are not mentioned above?
@@ -444,7 +444,7 @@ The below list detailed the required steps:
 
 2. This use case is equivalent to run now button at the schedule of the “0-Linux-Demo-V02” on the selected cloud protection as shown in below figure. After clicking “Run Now” button, a cloud protection will commence against the virtual machine, a recovery point is going to be created at the cloud protection store.
 
-![](/img/gui-run-now-cloud-protection.png)
+![UI for run now protection jobs](/img/gui-run-now-cloud-protection.png)
 
 3. The GreenLake API to accomplish the use case above was **POST /backup-recovery/v1beta1/protection-jobs/:id/run**, and the documentation of this [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobRun/)also list the required JSON structure for the request body. Note that there was a key called **“fullBackup”** inside the request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. The below figure shows an example was the execution of run now without full backup protection of the third schedule which is cloud protection of this virtual machine. The value will be entered from the parameter of this API in this manner:
 **POST /backup-recovery/v1beta1/protection-jobs/"\<protection-jobs-id\>"/run.**
