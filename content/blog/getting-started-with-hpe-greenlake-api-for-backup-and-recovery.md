@@ -5,6 +5,10 @@ author: Ron Dharma
 authorimage: /img/face-portraitlarge.jpg
 thumbnailimage: /img/alletra-element-small.png
 disable: false
+tags:
+  - api
+  - greenlake-api
+  - data-services-cloud-console
 ---
 ![]()
 
