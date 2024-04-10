@@ -110,7 +110,7 @@ The list of the steps to perform this use case using GreenLake API
 
 ![Task completion on POST protectoin-stores](/img/api-async-on-post-protection-stores.png)
 
-For reference, I went into the Protection Stores menu as shown in the below figure to show that HPE GreenLake Backup and Recovery, and confirmed that the desired protection store was available.
+5. For reference, I went into the Protection Stores menu as shown in the below figure to show that HPE GreenLake Backup and Recovery, and confirmed that the desired protection store was available.
 
 ![Validating cloud protection store has been created](/img/ui-validated-cloud-protection-store-completed.png)
 
