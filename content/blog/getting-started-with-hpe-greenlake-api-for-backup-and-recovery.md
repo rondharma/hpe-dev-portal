@@ -93,7 +93,7 @@ A protection store is the critical resource that is required to store the recove
 
 The list of the steps to perform this use case using GreenLake API
 
-1. Use the [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/StoreOncesList/)to discover the StoreOnce instance that can connect to the cloud protection store and copy the id which will be used as the value for storageSystemId as shown in below JSON request body. API for this: **GET /backup-recovery/v1beta1/storonces?limit=20&offset=0**
+1. Use the [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/StoreOncesList/)to discover the StoreOnce instance that can connect to the cloud protection store and copy the id which will be used as the value for storageSystemId as shown in below JSON request body. API for this: **GET /backup-recovery/v1beta1/storonces?limit=20&offset=0**
 
 ![Discover deployed StoreOnce to create cloud protection store](/img/api-discover-storeonce.png)
 
@@ -366,10 +366,9 @@ The above figure shows JSON structure for request body of **POST /backup-recover
 
 ## Applying protection policy to a Virtual Machine
 
-Next in the list of use cases for this blog post, I followed the progression for the day one activities required to protect a virtual machine which is applying this protection policy to a virtual machine (or any other assets).
-The steps required to apply the protection policy against a virtual machine:
+Next in the list of use cases for this blog post, I followed the progression for the day one activities. The next one is to protect a virtual machine which is applying this protection policy to a virtual machine (or any other assets). The steps required to apply the protection policy against a virtual machine:
 
-1. I obtained the values from **virtual machine id, name, and type** keys which were going to be used as the key-pair values required for the key **assetInfo** as shown in below figures. To obtain those, I used the HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/tag/virtual-machines/) for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02”. 
+1. I obtained the values from **virtual machine id, name, and type** keys which were going to be used as the key-pair values required for the key **assetInfo** as shown in below figures. To obtain those, I used the HPE GreenLake [API] https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/tag/virtual-machines/) for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02”.
    The API used for this: **GET /virtualization/v1beta1/virtual-machines?sort=name desc&select=appType,id,name,type,guestInfo,protectionJobInfo&filter=name eq '0-Linux-Demo-VM02'**
 
 ![API to find virtual-machines and it's properties](/img/api-find-virtual-machines.png)
