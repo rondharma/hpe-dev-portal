@@ -239,7 +239,7 @@ The list of the steps to create this protection policy:
 
 ![API to create protection policy](/img/api-to-create-protection-policy.png)
 
-The below figure shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids obtained from different protection tiers:
+6a. The below figure shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids obtained from different protection tiers:
 
 1. **ID: “<protection-policies-id>"**
 2. **SNAPSHOT: “<snapshot-protection-id>”**
