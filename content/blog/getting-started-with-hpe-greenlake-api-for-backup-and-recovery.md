@@ -473,20 +473,17 @@ API used for this: **GET /virtualization/v1beta1/virtual-machines?sort=name desc
 
 ![API to obtain the backup Id of a cloud recovery point](/img/api-to-obtain-backup-id-for-recovery.png)
 
-3. The last step is to use GreenLake API to recover the cloud protection into a VMware hypervisor at the datastore that was in that VMware cluster. There were several parameter keys required to be defined in the request Body for GreenLake API POST /backup-recovery/v1beta1/virtual-machines/:id/restore as displayed in below figure.
-   The required parameters are “cluster id”, and “datastore id”, and the “network id” to associate the virtual machines. The steps shown below are the steps to obtain those values using the HPE GreenLake REST API for virtualization.
-
-3a. Obtain the **datastore id** and the **cluster id** from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into GreenLake API GET /virtualization/v1beta1/datastores. The API for this: **GET /virtualization/v1beta1/datastores?filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,id**
+3. Obtain the **datastore id** and the **cluster id** from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into GreenLake API GET /virtualization/v1beta1/datastores. The API for this: **GET /virtualization/v1beta1/datastores?filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,id**
 
 ![API to obtain the cluster and datastore Ids](/img/api-obtain-cluster-and-datastore.png)
 
-3b. To obtain the hypervisor Network Id that is required to recover the recovery point into a new virtual machine, I have to discover the hypervisor id. The API used for this: 
+4. To obtain the hypervisor Network Id that is required to recover the recovery point into a new virtual machine, I have to discover the hypervisor id. The API used for this: 
 
 > **GET /virtualization/v1beta1/hypervisor-managers?select=name,id,state,status,dataOrchestratorInfo,services,hypervisorManagerType,releaseVersion&filter=state eq "OK" and status eq "OK" and name eq "vCenter Name"**
 
 ![API to get hypervisorId](/img/api-obtain-hypervisor-id.png)
 
-3c. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. Currently, this API was not available yet as part of the March 2024 release, but this API surely will be available in near future. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this API: 
+5. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. Currently, this API was not available yet as part of the March 2024 release, but this API surely will be available in near future. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this API: 
 
 > **GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'**
 
@@ -500,7 +497,7 @@ API used for this: **GET /virtualization/v1beta1/virtual-machines?sort=name desc
 
 ![Task Id confirming the completion of the recovery](/img/task-display-recovery-is-completed.png)
 
-At the end, I went to the vCenter console to validate that the virtual machine 0-Linux-Demo-VN02-2-05-04-2024_05:48_PM was indeed part of the virtual machines inventory.
+6. At the end, I went to the vCenter console to validate that the virtual machine 0-Linux-Demo-VN02-2-05-04-2024_05:48_PM was indeed part of the virtual machines inventory.
 
 ![vCenter display the VM recovery completed](/img/the-vcenter-display-the-recovered-vm.png)
 
