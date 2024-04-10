@@ -244,10 +244,11 @@ The above figure shows JSON structure for request body of **POST /backup-recover
 
 7. The below figure shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids obtained from different protection tiers:
 
-1. **ID: “<protection-policies-id>"**
-2. **SNAPSHOT: “<snapshot-protection-id>”**
-3. **ON-PREMISES: “<onprem-protection-id>”**
-4. **CLOUD: “<cloud-protection-id>”**
+*. **ID: “\<protection-policies-id\>"**
+2. **SNAPSHOT: “\<snapshot-protection-id\>”**
+3. **ON-PREMISES: “\<onprem-protection-id\>”**
+4. **CLOUD: “\<cloud-protection-id\>”**
+
 
 ```json
 {
