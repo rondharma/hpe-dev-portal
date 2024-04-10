@@ -374,7 +374,7 @@ Next in the list of use cases for this blog post, I followed the progression for
 ![API to find virtual-machines and it's properties](/img/api-find-virtual-machines.png)
 
 2. I created a JSON structure of a request body for applying the protection policy against a virtual machine without a protection group to make a simple example for this blog post. Note that this JSON body structure created the association of the asset, which is a virtual machine, against the protection policy. The two other parameters entered here were the consistency **(CRASH vs APPLICATION)** and technology for protection **(VMWARE_CBT vs VOLUME)**. The three values obtained from previous response of the previous API POST /backup-recovery/v1beta1/protection-policies associated with SNAPSHOT, BACKUP and CLOUD would be used as part of this request body. Each of this protection will be identified with schedule id marked 1,2 and 3 as shown below. There are other options available as part of this JSON structure of this request body, and they are documented in this interactive guide for this API.
-   **Note:** As of March 2024, value of type from virtualization/virtual-machine was translated to hybrid-cloud/virtual-machine. 
+> **Note:** As of March 2024, value of type from virtualization/virtual-machine was translated to hybrid-cloud/virtual-machine.
 
 ```json
 {
