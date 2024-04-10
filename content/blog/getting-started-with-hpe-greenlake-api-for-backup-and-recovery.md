@@ -146,7 +146,7 @@ The list of the steps to create this protection policy:
 5. For the next step, I created a request body JSON structure that represents the protection policy schedule and each of the protection stores. Inside this JSON structures for request body, I defined the three objects that represent the SNAPSHOT, BACKUP (on-premises), CLOUD_BACKUP. Note that this structure can be expanded or contracted depending on the required backup strategy. The SNAPSHOT object did not require **"<protection-store-Id>"** as that recovery points will exist inside the primary storage array. This request JSON body structure was required to create the protection policy using HPE GreenLake [API ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/)**POST /backup-recovery/v1beta1/protection-policies.** 
 
 > ***NOTE:*** I didn’t include objects for immutability, prescript, and postscript into the JSON structure. If it’s not intended, you don’t need to include unused key-pair values into the JSON structure. Additionally, the SNAPSHOT object does no require a **protectionStoreId**. 
-
+>
 > The below figure shows JSON structure for request body of **POST /backup-recovery/v1beta1/protection-policies** for the creation of protection-policy as intended. 
 
 ```json
@@ -447,9 +447,7 @@ The below list detailed the required steps:
 
 ![API to execute a protection run](/img/api-to-execute-a-protection.png)
 
-4. The result from the API execution above can be validated from the API /data-services/v1beta1/async-operations/:id using the task id obtained from the above response header.
-
-> The API used for this: **G﻿ET /data-services/v1beta1/async-operations/{{taskId}}**
+4. The result from the API execution above can be validated from the API /data-services/v1beta1/async-operations/:id using the task id obtained from the above response header. The API used for this: **G﻿ET /data-services/v1beta1/async-operations/{{taskId}}**
 
 ![API async-operations of execution of protection-jobs](/img/api-task-list-after-a-run-execution.png)
 
@@ -473,18 +471,18 @@ API used for this: **GET /virtualization/v1beta1/virtual-machines?sort=name desc
 3. The last step is to use GreenLake API to recover the cloud protection into a VMware hypervisor at the datastore that was in that VMware cluster. There were several parameter keys required to be defined in the request Body for GreenLake API POST /backup-recovery/v1beta1/virtual-machines/:id/restore as displayed in below figure.
    The required parameters are “cluster id”, and “datastore id”, and the “network id” to associate the virtual machines. The steps shown below are the steps to obtain those values using the HPE GreenLake REST API for virtualization.
 
-> 3a. Obtain the **datastore id** and the **cluster id** from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into GreenLake API GET /virtualization/v1beta1/datastores. The API for this: **GET /virtualization/v1beta1/datastores?filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,id**
+3a. Obtain the **datastore id** and the **cluster id** from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into GreenLake API GET /virtualization/v1beta1/datastores. The API for this: **GET /virtualization/v1beta1/datastores?filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,id**
 
 ![API to obtain the cluster and datastore Ids](/img/api-obtain-cluster-and-datastore.png)
 
-> 3b. To obtain the hypervisor Network Id that is required to recover the recovery point into a new virtual machine, I have to discover the hypervisor id. The API used for this: 
->
+3b. To obtain the hypervisor Network Id that is required to recover the recovery point into a new virtual machine, I have to discover the hypervisor id. The API used for this: 
+
 > **GET /virtualization/v1beta1/hypervisor-managers?select=name,id,state,status,dataOrchestratorInfo,services,hypervisorManagerType,releaseVersion&filter=state eq "OK" and status eq "OK" and name eq "vCenter Name"**
 
 ![API to get hypervisorId](/img/api-obtain-hypervisor-id.png)
 
-> 3c. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. Currently, this API was not available yet as part of the March 2024 release, but this API surely will be available in near future. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this API: 
->
+3c. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. Currently, this API was not available yet as part of the March 2024 release, but this API surely will be available in near future. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this API: 
+
 > **GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'**
 
 ![](/img/api-to-get-the-network-id.png)
