@@ -427,8 +427,9 @@ The steps required to apply the protection policy against a virtual machine:
 
 ![API to apply protection policy against the VM](/img/api-applying-the-protection-jobs-against-a-vm.png)
 
-4. The API execution was executed successfully. I validated this completion using the task id that I obtained from the response headers as shown above. The API used for this: **GET /data-services/v1beta1/async-operations/{{taskId}}**\
-   **Note**: that that the execution of this API will trigger a protection execution right after the execution of this API completed.
+4. The API execution was executed successfully. I validated this completion using the task id that I obtained from the response headers as shown above. The API used for this: 
+**GET /data-services/v1beta1/async-operations/{{taskId}}**\
+>**Note**: that that the execution of this API will trigger a protection execution right after the execution of this API completed.
 
 ![Task list to display completion of the application of protection policy.](/img/api-async-on-post-protection-stores.png)
 
