@@ -365,7 +365,7 @@ The above figure shows JSON structure for request body of **POST /backup-recover
 }
 ```
 
-### Applying protection policy to a Virtual Machine
+## Applying protection policy to a Virtual Machine
 
 Next in the list of use cases for this blog post, I followed the progression for the day one activities required to protect a virtual machine which is applying this protection policy to a virtual machine (or any other assets).
 The steps required to apply the protection policy against a virtual machine:
@@ -427,13 +427,13 @@ The steps required to apply the protection policy against a virtual machine:
 
 ![API to apply protection policy against the VM](/img/api-applying-the-protection-jobs-against-a-vm.png)
 
-4. The API execution was executed successfully. I validated this completion using the task id that I obtained from the response headers as shown above. The API used for this: 
-**GET /data-services/v1beta1/async-operations/{{taskId}}**\
+4. The API execution was executed successfully. I validated this completion using the task id that I obtained from the response headers as shown above. The API used for this:
+**GET /data-services/v1beta1/async-operations/{{taskId}}**
 >**Note**: that that the execution of this API will trigger a protection execution right after the execution of this API completed.
 
 ![Task list to display completion of the application of protection policy.](/img/api-async-on-post-protection-stores.png)
 
-### Triggering a protection
+## Triggering a protection
 
 Once the protection policy named "VMware create three tiers" was bound to the virtual machine as shown above, I then issued a trigger to create cloud protection against the virtual machine “0-Linux-Demo-VM02” to create one-off cloud-protection. 
 
