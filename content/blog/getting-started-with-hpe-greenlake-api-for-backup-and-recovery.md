@@ -35,7 +35,7 @@ This set of APIs is released with two different specifications which are identif
 
 > **Note:** At the time of release of March 2024, all of resources for HPE GreenLake API for Backup and Recovery are limited to data protection of on-premises assets. The manipulation of the cloud assets will be made available in the next release.
 
-\## W﻿hat are Backup and Recovery API resources?
+## W﻿hat are Backup and Recovery API resources?
 
 The below diagram displays those components in the first part of the GreenLake API for Backup and Recovery. This first part of components consists of the resources that are considered as the infrastructure for HPE GreenLake for Backup and Recovery on-premises and at the cloud. These components must be deployed prior to operation of the HPE GreenLake for Backup and Recovery. The on-premises components consist of Protection Store Gateway VM or HPE StoreOnce (purpose built backup appliance). Additionally, the cloud components consist of the data services instance deployed at HPE GreenLake workspace, and the cloud protection store to contain the cloud recovery points (backups).  The information on getting started with HPE GreenLake for Backup and Recovery is available in the support [website](https://support.hpe.com/hpesc/public/docDisplay?docId=sd00003102en_us&page=bar_overview_dscc.html)
 
