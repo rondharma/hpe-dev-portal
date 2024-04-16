@@ -463,8 +463,7 @@ The below list detailed the required steps:
 
 ![API to execute a protection run](/img/api-to-execute-a-protection.png)
 
-4. The result from the API execution above can be validated from the API `/data-services/v1beta1/async-operations/:id` using the task id obtained from the above response header. The API used for this: 
-   `G﻿ET /data-services/v1beta1/async-operations/{{taskId}}`
+4. The result from the API execution above can be validated from the API `/data-services/v1beta1/async-operations/:id` using the task id obtained from the above response header. The API used for this: `G﻿ET /data-services/v1beta1/async-operations/{{taskId}}`.
 
 ![API async-operations of execution of protection-jobs](/img/api-task-list-after-a-run-execution.png)
 
@@ -474,7 +473,7 @@ The activities above were validated from the HPE GreenLake Backup and Recovery l
 
 ## Wow.. those were so cool! Can I recover a new virtual machine from that recovery point that I just created?
 
-Each of the recovery points regardless of the location of store (array snapshot, On-Premises Protection-Store, or HPE Cloud Protection-Store) can be recovered using this GreenLake API: **POST /backup-recovery/v1beta1/virtual-machines/:id/restore.**
+Each of the recovery points regardless of the location of store (array snapshot, On-Premises Protection-Store, or HPE Cloud Protection-Store) can be recovered using this GreenLake API: `POST /backup-recovery/v1beta1/virtual-machines/:id/restore`
 
 1. This API requires a request body of JSON structure as documented in the HPE GreenLake developer website. In this blog post, I planned a demo of the steps to recover the virtual machine from a copy that had existed in the HPE Cloud Protection Store into the VMware cluster where the Protection Storage Gateway is hosted (recover as a new virtual machine). API used for this:
    **GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-Linux-Demo-VM02’&select=appType,id,name,type,guestinfo,protectionJobInfo**
