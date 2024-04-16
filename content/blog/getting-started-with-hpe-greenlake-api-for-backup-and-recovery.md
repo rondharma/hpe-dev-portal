@@ -488,8 +488,7 @@ Each of the recovery points regardless of the location of store (array snapshot,
 
 ![API to obtain the cluster and datastore Ids](/img/api-obtain-cluster-and-datastore.png)
 
-4. To obtain the hypervisor Network Id that is required to recover the recovery point into a new virtual machine, I have to discover the hypervisor id. The API used for this: 
-   **GET /virtualization/v1beta1/hypervisor-managers?select=name,id,state,status,dataOrchestratorInfo,services,hypervisorManagerType,releaseVersion&filter=state eq "OK" and status eq "OK" and name eq "vCenter Name"**
+4. To obtain the hypervisor Network Id that is required to recover the recovery point into a new virtual machine, I have to discover the hypervisor id. The API used for this: `GET /virtualization/v1beta1/hypervisor-managers?select=name,id,state,status,dataOrchestratorInfo,services,hypervisorManagerType,releaseVersion&filter=state eq "OK" and status eq "OK" and name eq "vCenter Name"`.
 
 ![API to get hypervisorId](/img/api-obtain-hypervisor-id.png)
 
