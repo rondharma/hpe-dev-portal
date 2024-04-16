@@ -463,8 +463,8 @@ The below list detailed the required steps:
 
 ![API to execute a protection run](/img/api-to-execute-a-protection.png)
 
-4. The result from the API execution above can be validated from the API /data-services/v1beta1/async-operations/:id using the task id obtained from the above response header. The API used for this: 
-   **G﻿ET /data-services/v1beta1/async-operations/{{taskId}}**
+4. The result from the API execution above can be validated from the API `/data-services/v1beta1/async-operations/:id` using the task id obtained from the above response header. The API used for this: 
+   `G﻿ET /data-services/v1beta1/async-operations/{{taskId}}`
 
 ![API async-operations of execution of protection-jobs](/img/api-task-list-after-a-run-execution.png)
 
