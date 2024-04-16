@@ -102,7 +102,7 @@ This example below displays the creation of the cloud protection store at HPE Gr
 
 The list of the steps to perform this use case using HPE GreenLake API:
 
-1. Use the [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/StoreOncesList/) to discover the StoreOnce instance that can connect to the cloud protection store and copy the id which will be used as the value for storageSystemId as shown in below JSON request body. API for this: **GET /backup-recovery/v1beta1/storonces?limit=20&offset=0**
+1. Use the [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/StoreOncesList/) to discover the StoreOnce instance that can connect to the cloud protection store and copy the id which will be used as the value for storageSystemId as shown in below JSON request body. The API used for this: `GET /backup-recovery/v1beta1/storonces?limit=20&offset=0`
 
 ![Discover deployed StoreOnce to create cloud protection store](/img/api-discover-storeonce.png)
 
