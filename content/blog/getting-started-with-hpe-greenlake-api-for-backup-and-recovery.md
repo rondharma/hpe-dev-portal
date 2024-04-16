@@ -253,7 +253,8 @@ The list of the steps to create this protection policy:
 * **SNAPSHOT: “\<snapshot-protection-id\>”**
 * **ON-PREMISES: “\<onprem-protection-id\>”**
 * **CLOUD: “\<cloud-protection-id\>”**
-T﻿he full listing of the response body from 'POST /backup-recovery/v1beta1/protection-policies'.
+
+>T﻿he full listing of the response body from 'POST /backup-recovery/v1beta1/protection-policies'.
 
 ```json
 {
