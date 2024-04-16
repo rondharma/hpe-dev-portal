@@ -110,9 +110,12 @@ The list of the steps to perform this use case using HPE GreenLake API:
 
 ![API to figure out the Azure storage location](/img/figure-out-storage-location.png)
 
-3. Moving forward, I composed the cloud protection store at the storage location using values from the previous response body. For this API execution, I created a request JSON body structure for `POST /backup-recovery/v1beta1/protection-stores` that contains the key-pair values from the previous API response. The below figure showed that JSON body to compose the cloud protection store that was connected to the HPE StoreOnce. The complete information about [this](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/) JSON body structures is provided on the interactive documentation of 'POST /backup-recovery/v1beta1/protection-stores' under Payload tab.
+3. Moving forward, I composed the cloud protection store at the storage location using values from the previous response body. For this API execution, I created a request JSON body structure for `POST /backup-recovery/v1beta1/protection-stores` that contains the key-pair values from the previous API response. The below figure showed that JSON body to compose the cloud protection store that was connected to the HPE StoreOnce. 
 
 ![API composing the protection store](/img/api-compose-protection-store.png)
+
+>The complete information about [this](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/) JSON body structures is provided on the interactive documentation of 'POST /backup-recovery/v1beta1/protection-stores' under Payload tab.
+!﻿[API JSON body request to compose protection store]()
 
 4. After roughly about 5 minutes, the cloud protection store was completely created based on response of the following GET /data-services/async-operations API as shown in the below figure. Note that I used a set of selection parameters in below figure to summarize the information from this task information: 
    **GET /data-services/v1beta1/async-operations/{{taskId}}/select=associatedResources,createdAt,displayName,customerId,logMessages,progressPercent,state.**  I copied the task’s id from the response header’s location value of the prior API execution into a Postman’s variable called {{taskId}}, and incorporated taskId variable to the async-operations execution.
