@@ -479,7 +479,7 @@ Each of the recovery points regardless of the location of store (array snapshot,
 
 ![API to discover backup for recovery of VM](/img/api-to-discover-vm-for-recovery.png)
 
-2. Obtain the Cloud Recovery Protection Id from the for the cloud protection recovery from the virtual machine using the GreenLake API GET /backup-recovery/v1beta1/virtual-machines/:id/backups given the virtual machine id. Copy the “{{backupId}}” from the response body from the below figure. API used for this: 
+2. Obtain the Cloud Recovery Protection Id from the for the cloud protection recovery from the virtual machine using the GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineBackupList/) `GET /backup-recovery/v1beta1/virtual-machines/:id/backups` given the virtual machine id. Copy the *﻿*“{backupId}”*﻿* from the response body from the below figure. API used for this: 
 `GET /backup-recovery/v1beta1/virtual-machines/{{vmId}}/backups?select=name,description,backupType,id`
 
 ![API to obtain the backup Id of a cloud recovery point](/img/api-to-obtain-backup-id-for-recovery.png)
@@ -492,18 +492,15 @@ Each of the recovery points regardless of the location of store (array snapshot,
 
 ![API to get hypervisorId](/img/api-obtain-hypervisor-id.png)
 
-5. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. Currently, this API was not documented yet as part of the March 2024 release, but this API surely will be available in near future. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this API: 
-   **GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'**
+5. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. Currently, this API was not documented yet as part of the March 2024 release, but this API surely will be available in near future. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this API: `GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'`.
 
 ![API to get network ID for VM](/img/api-to-get-the-network-id.png)
 
-4. After I obtained the parameters that were required to build the request body to recover a cloud recovery point from “0-Linux-Demo-VM02’, I constructed the JSON request body as shown in the below figure. To restore the recovery points into a new virtual machine, the restoreType key of the request body JSON structure was set to “ALTERNATE” as shown in the below figure. I also provided the new virtual machine name after the recovery, “0-Linux-Demo-VN02-2-05-04-2024_05:48_PM”. The API used for this:
-   **POST /backup-recovery/v1beta1/virtual-machines/{{vmId}}/restore**
+4. After I obtained the parameters that were required to build the request body to recover a cloud recovery point from “0-Linux-Demo-VM02’, I constructed the JSON request body as shown in the below figure. To restore the recovery points into a new virtual machine, the restoreType key of the request body JSON structure was set to “ALTERNATE” as shown in the below figure. I also provided the new virtual machine name after the recovery, “0-Linux-Demo-VN02-2-05-04-2024_05:48_PM”. The API used for this: `POST /backup-recovery/v1beta1/virtual-machines/{{vmId}}/restore`
 
 ![API to recover a cloud protection copy from a VM](/img/api-restoring-a-cloud-protection-recovery-point.png)
 
-5. To validate that the recovery was completed, and I tracked the progress from the response using the async-operations API as shown below. The API used for this: 
-   **GET /data-services/v1beta1/async-operations/:id?select=associatedResources,createdAt,endedAt,error,displayName,healthStatus,id,customerId,progressPercent,name,type,state**
+5. To validate that the recovery was completed, and I tracked the progress from the response using the async-operations API as shown below. The API used for this: `GET /data-services/v1beta1/async-operations/:id?select=associatedResources,createdAt,endedAt,error,displayName,healthStatus,id,customerId,progressPercent,name,type,state`.
 
 ![Task Id confirming the completion of the recovery](/img/task-display-recovery-is-completed.png)
 
