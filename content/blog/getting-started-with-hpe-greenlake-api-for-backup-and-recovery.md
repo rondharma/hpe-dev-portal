@@ -34,7 +34,7 @@ The Backup and Recovery API specification files contain information that describ
 This set of APIs is released with two different specifications which are identified as revision v1alpha1 and v1beta1 at the time of introduction in March 2024. Moving forward, the API will be updated to next revision toward the long-term release version. As each individual API is updated, there will also be more capabilities added to any of the resources identified under this set of APIs.  For information about update stages, and deprecation, please follow the HPE GreenLake Developer Portal Versioning [guide](https://developer.greenlake.hpe.com/docs/greenlake/guides/public/standards/versioning_basics/). You can expect that the API categorized as v1alpha1 will be updated within a short time; hence, I recommend for monitoring any announcement of the next revision of APIs for Backup and Recovery in this documentation [guide](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/guide/). 
 
 > **NOTE:** 
->At the time of release of March 2024, all of resources for HPE GreenLake API for Backup and Recovery are limited to data protection of on-premises assets. The manipulation of the cloud assets will be made available in the next release. 
+> At the time of release of March 2024, all of resources for HPE GreenLake API for Backup and Recovery are limited to data protection of on-premises assets. The manipulation of the cloud assets will be made available in the next release. 
 
 ## W﻿hat are Backup and Recovery API resources?
 
@@ -91,8 +91,9 @@ The interactive API reference documentation guide provides information about the
 ## Creating a Cloud Protection Store
 
 A protection store is the critical resource that is required to store the recovery points on-premises and in the cloud. The cloud protection stores are created on top of either the Protection Store Gateway or HPE StoreOnce, because either one is required for connections to cloud protection-stores. To perform this use case, we will need to discover the StoreOnce and the storage location of the cloud protection store. As you can see now, we will be using the HPE GreenLake API for the data-services to discover the storage location of the cloud protection store. 
+
 > **NOTE:** 
->You will see in this blog post that I used combination of HPE GreenLake APIs from [data services](https://developer.greenlake.hpe.com/docs/greenlake/services/data-services/public/guide/) and [virtualization](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/) to accomplish the examples below.
+> You will see in this blog post that I used combination of HPE GreenLake APIs from [data services](https://developer.greenlake.hpe.com/docs/greenlake/services/data-services/public/guide/) and [virtualization](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/) to accomplish the examples below.
 
 This example below displays the creation of the cloud protection store at HPE GreenLake protection store in Azure cloud storage.
 
@@ -114,8 +115,10 @@ The list of the steps to perform this use case using HPE GreenLake API:
 
 ![API composing the protection store](/img/api-compose-protection-store.png)
 
->The complete information about [this](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/) JSON body structures is provided on the interactive documentation of 'POST /backup-recovery/v1beta1/protection-stores' under Payload tab.
-!﻿[API JSON body request to compose protection store]()
+> The complete information about [this](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/) JSON body structures is provided on the interactive documentation of 'POST /backup-recovery/v1beta1/protection-stores' under Payload tab.
+>
+>
+> ![API Request body JSON to compose protection Store](/img/api-to-create-protection-stores-request-json-body.png)
 
 4. After roughly about 5 minutes, the cloud protection store was completely created based on response of the following GET /data-services/async-operations API as shown in the below figure. Note that I used a set of selection parameters in below figure to summarize the information from this task information: 
    **GET /data-services/v1beta1/async-operations/{{taskId}}/select=associatedResources,createdAt,displayName,customerId,logMessages,progressPercent,state.**  I copied the task’s id from the response header’s location value of the prior API execution into a Postman’s variable called {{taskId}}, and incorporated taskId variable to the async-operations execution.
