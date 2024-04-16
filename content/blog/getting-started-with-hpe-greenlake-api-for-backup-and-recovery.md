@@ -49,7 +49,7 @@ The second part of the GreenLake API for Backup Recovery resources is the resour
 
 ![GLBR architecture 2](/img/glbr-architecture-overview-2.png)
 
-*The above figure display resources that are parts of the hypervisor and on-premises components that can be protected.*
+*The above figure displays resources that are parts of the hypervisor and on-premises components that can be protected.*
 
 > ***Note:*** 
 > In the current HPE Developer website, there is a single resource categorized as v1alpha1 that will be used to register, unregister, and update the hypervisor-manager. The current supported hypervisor-manager is VMware vCenter, and it contains the cluster, virtual machines, and datastore used for the source of data-protection. The hypervisor-manager enabled HPE GreenLake Backup and Recovery to discover the vCenter which control the assets for data protection. This a crucial discovery will lead to application of protection-policy, setup the schedule, assign the protection-store where the copy protections will be allocated, and rest of the data protection operations. 
