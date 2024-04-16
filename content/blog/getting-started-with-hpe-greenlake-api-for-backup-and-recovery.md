@@ -444,7 +444,7 @@ Once the protection policy named "VMware create three tiers" was bound to the vi
 The below list detailed the required steps:
 
 1. I figured out the protection-jobs that is associated with the cloud backup of the virtual machine “0-Linux-Demo-VM02.” I used HPE GreenLake [API](`https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList`) for Backup and Recovery **GET /backup-recovery/v1beta1/protection-jobs** and **filter “assetInfo/id eq {VM-id}”** associated with the virtual-machine as shown below. Note that the variable **{vmId}** contained the value of the virtual machine id as discovered in previous step, namely "<virtual-machine-id>". The response body’s JSON structure contained the id of the protection jobs associated with “0-Linux-Demo-VM02”. The API used for this: 
-   `GET /backup-recovery/v1beta1/protection-jobs?filter=assetInfo/id eq {{vmId}}&select=assetInfo,id,operational,protections`. From the response body, I recognized that cloud protection is the scheduleId no 3.
+`GET /backup-recovery/v1beta1/protection-jobs?filter=assetInfo/id eq {{vmId}}&select=assetInfo,id,operational,protections`. From the response body, I recognized that cloud protection is the **scheduleId no 3.**
 
 ![API to figure out protection-jobs](/img/api-to-figure-out-protection-jobs.png)
 
@@ -452,16 +452,14 @@ The below list detailed the required steps:
 
 ![UI for run now protection jobs](/img/gui-run-now-cloud-protection.png)
 
-3. The GreenLake API to accomplish the use case above was **POST /backup-recovery/v1beta1/protection-jobs/:id/run**, and the documentation of this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobRun) also list the required JSON structure for the request body.
+3. The GreenLake API to accomplish the use case above was `POST /backup-recovery/v1beta1/protection-jobs/:id/run`, and the documentation of this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobRun) also list the required JSON structure for the request body as shown here:
    `﻿{
    "﻿fullBackup": false,
-   "﻿ScheduleIds: \[3\]
-   }﻿
+   "﻿ScheduleIds: [3]
+   }﻿`
 
 >Note that there was a key called **“fullBackup”** inside the request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. The below figure shows an example of the execution of **run now** without full backup protection of the third schedule which is cloud protection of this virtual machine. The value will be entered from the parameter of this API in this manner:
-   **POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run.**
-
-4.
+   `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`
 
 ![API to execute a protection run](/img/api-to-execute-a-protection.png)
 
