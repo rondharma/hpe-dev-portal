@@ -254,7 +254,7 @@ The list of the steps to create this protection policy:
 * **ON-PREMISES: “\<onprem-protection-id\>”**
 * **CLOUD: “\<cloud-protection-id\>”**
 
->T﻿he full listing of the response body from 'POST /backup-recovery/v1beta1/protection-policies'.
+>T﻿he full listing of the response body from `POST /backup-recovery/v1beta1/protection-policies`.
 
 ```json
 {
@@ -374,7 +374,7 @@ The list of the steps to create this protection policy:
 
 Next in the list of use cases for this blog post, I followed the progression for the day one activities. The next one is to protect a virtual machine which is applying this protection policy to a virtual machine (or any other assets). The steps required to apply the protection policy against a virtual machine are listed below:
 
-1. I obtained the values from **virtual machine id, name, and type** keys which were going to be used as the key-pair values required for the key **assetInfo** as shown in below figures. To obtain those, I used the HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/tag/virtual-machines/) for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02”. The API used for this: `GET /virtualization/v1beta1/virtual-machines?sort=name desc&select=appType,id,name,type,guestInfo,protectionJobInfo&filter=name eq '0-Linux-Demo-VM02`.
+1. I obtained the values from **virtual machine id, name, and type** keys which were going to be used as the key-pair values required for the key **assetInfo** as shown in below figures. To obtain those, I used the HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/tag/virtual-machines/) for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02”. The API used for this: `GET /virtualization/v1beta1/virtual-machines?sort=name desc&select=appType,id,name,type,guestInfo,protectionJobInfo&filter=name eq '0-Linux-Demo-VM02'`.
 
 ![API to find virtual-machines and it's properties](/img/api-find-virtual-machines.png)
 
@@ -427,12 +427,11 @@ Next in the list of use cases for this blog post, I followed the progression for
 }
 ```
 
-3. In the figure below, I used HPE GreenLake API for Backup and Recovery **POST /backup-recovery/v1beta1/protection-jobs** with the body JSON structure from the above so that I could associate the protection policy against a virtual machine. This POST API execution completed synchronously and returned Status **0x200** with a response. The response body contained the same JSON construct as the request body, with exception of, the addition of multiple keys of ids. This information will be required for my next example which is to trigger a backup **(run now)** of this protection policy against a virtual machine. 
+3. In the figure below, I used HPE GreenLake API for Backup and Recovery `POST /backup-recovery/v1beta1/protection-jobs` with the body JSON structure from the above so that I could associate the protection policy against a virtual machine. This POST API execution completed synchronously and returned Status **0x200** with a response. The response body contained the same JSON construct as the request body, with exception of, the addition of multiple keys of ids. This information will be required for my next example which is to trigger a backup **(run now)** of this protection policy against a virtual machine. 
 
 ![API to apply protection policy against the VM](/img/api-applying-the-protection-jobs-against-a-vm.png)
 
-4. The API execution was executed successfully. I validated this completion using the task id that I obtained from the response headers as shown above. The API used for this:
-   **GET /data-services/v1beta1/async-operations/{{taskId}}**
+4. The API execution was executed successfully. I validated this completion using the task id that I obtained from the response headers as shown above. The API used for this: `GET /data-services/v1beta1/async-operations/{{taskId}}`
 
    > **Note**: that that the execution of this API will trigger a protection execution right after the execution of this API completed.
 
@@ -444,7 +443,7 @@ Once the protection policy named "VMware create three tiers" was bound to the vi
 
 The below list detailed the required steps:
 
-1. I figured out the protection-jobs that is associated with the cloud backup of the virtual machine “0-Linux-Demo-VM02.” I used HPE GreenLake [API](`https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList`) for Backup and Recovery **GET /backup-recovery/v1beta1/protection-jobs** and **filter “assetInfo/id eq {VM-id}”** associated with the virtual-machine as shown below. Note that the variable **{vmId}** contained the value of the virtual machine id as discovered in previous step, namely "<virtual-machine-id>". The response body’s JSON structure contained the id of the protection jobs associated with “0-Linux-Demo-VM02”. The API used for this: 
+1. I figured out the protection-jobs that is associated with the cloud backup of the virtual machine “0-Linux-Demo-VM02.” I used HPE GreenLake [API](`https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList`) for Backup and Recovery **GET /backup-recovery/v1beta1/protection-jobs** and **filter “assetInfo/id eq {VM-id}”** associated with the virtual-machine as shown below. Note that the variable **{vmId}** contained the value of the virtual machine id as discovered in previous step, namely "\<virtual-machine-id\>". The response body’s JSON structure contained the id of the protection jobs associated with “0-Linux-Demo-VM02”. The API used for this: 
    `GET /backup-recovery/v1beta1/protection-jobs?filter=assetInfo/id eq {{vmId}}&select=assetInfo,id,operational,protections`. From the response body, I recognized that cloud protection is the **scheduleId no 3.**
 
 ![API to figure out protection-jobs](/img/api-to-figure-out-protection-jobs.png)
