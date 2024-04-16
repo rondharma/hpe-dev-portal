@@ -151,7 +151,7 @@ The list of the steps to create this protection policy:
 
 ![API to obtain cloud protection store id](/img/api-discover-cloud-protection-store-id.png)
 
-5. For the next step, I created a request body JSON structure that represents the protection policy schedule and each of the protection stores. Inside this JSON structures for request body, I defined the three objects that represent the SNAPSHOT, BACKUP (on-premises), CLOUD_BACKUP. Note that this structure can be expanded or contracted depending on the required backup strategy. The SNAPSHOT object did not require **"<protection-store-Id>"** as that recovery points will exist inside the primary storage array. This request JSON body structure was required to create the protection policy using HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/) `POST /backup-recovery/v1beta1/protection-policies`.
+5. For the next step, I created a request body JSON structure that represents the protection policy schedule and each of the protection stores. Inside this JSON structures for request body, I defined the three objects that represent the SNAPSHOT, BACKUP (on-premises), CLOUD_BACKUP. Note that this structure can be expanded or contracted depending on the required backup strategy. The SNAPSHOT object did not require **"\<protection-store-Id\>"** as that recovery points will exist inside the primary storage array. This request JSON body structure was required to create the protection policy using HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/) `POST /backup-recovery/v1beta1/protection-policies`.
 
 > ***Note:*** I didn’t include objects for immutability, prescript, and postscript into the JSON structure. If it’s not intended, you don’t need to include unused key-pair values into the JSON structure. Additionally, the SNAPSHOT object does no require a **protectionStoreId**.
 
@@ -241,7 +241,7 @@ The list of the steps to create this protection policy:
 }
 ```
 
->The above figure shows JSON structure for request body of **POST /backup-recovery/v1beta1/protection-policies** for the creation of protection-policy as shown by the example in this section.
+>The above figure shows JSON structure for request body of `POST /backup-recovery/v1beta1/protection-policies` for the creation of protection-policy as shown by the example in this section.
 
 6. Finally, I created of the protection policies using the GreenLake API for Backup and Recovery `POST /backup-recovery/v1beta1/protection-policies`, and I used the above JSON structure in the request body. This is a special POST API execution where the response is returned immediately. The response of this API contained the body of JSON structure that will be useful to identify the protection-jobs such as the **“\<protection-policies-id\>”**
 
@@ -249,10 +249,10 @@ The list of the steps to create this protection policy:
 
 7. The below figure shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids for different protection tiers:
 
-* **ID: “<protection-policies-id>"**
-* **SNAPSHOT: “<snapshot-protection-id>”**
-* **ON-PREMISES: “<onprem-protection-id>”**
-* **CLOUD: “<cloud-protection-id>”**
+* **ID: “\<protection-policies-id\>"**
+* **SNAPSHOT: “\<snapshot-protection-id\>”**
+* **ON-PREMISES: “\<onprem-protection-id\>”**
+* **CLOUD: “\<cloud-protection-id\>”**
 
 ```json
 {
