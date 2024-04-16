@@ -139,7 +139,7 @@ The list of the steps to create this protection policy:
 
 ![PSG UI](/img/psg-ui-to-show-the-serial-no.png)
 
-2. Afterward, I used **GET /backup-recovery/v1beta1/protection-store-gateways** [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreGatewaysList/) to figure out the **"<protection-store-gateway-id>"** that was associated with the protection-stores that would be incorporated into the protection-policy.
+2. Afterward, I used `GET /backup-recovery/v1beta1/protection-store-gateways` [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreGatewaysList) to figure out the **"\<protection-store-gateway-id\>"** that was associated with the protection-stores that would be incorporated into the protection-policy.
 
 ![API show registered PSG](/img/api-display-registered-psg.png)
 
