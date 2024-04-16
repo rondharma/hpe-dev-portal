@@ -45,7 +45,7 @@ The below diagram displays those components in the first part of the GreenLake A
 
 *The above figure shows the resources that are part of the infrastructure to accommodate the data protection for HPE GreenLake for Backup and Recovery.*
 
-The second part of the GreenLake API for Backup Recovery resources is the resources from which HPE GreenLake for Backup and Recovery provides protection for data loss. In below diagram, you will see those assets which contains the components that need to be protected and the components which the assets are allocated at. Those components, such as virtual machine, datastore, or SQL database application, storage volumes, or physical hosts, are the assets that need to be protected. Nevertheless, other assets in this category include the components for the hypervisor, compute servers, storage array, networking, and the VMware vCenter that manage the hypervisor components. This HPE GreenLake API must maintain the inventory of all the assets that are protected by querying the vCenter.
+The second part of the GreenLake API for Backup Recovery resources is the resources from which HPE GreenLake for Backup and Recovery provides protection from data loss. In below diagram, you will see those assets which contains the components that need to be protected and the components which the assets are allocated at. Those components, such as virtual machine, datastore, or SQL database application, storage volumes, or physical hosts, are the assets that need to be protected. Nevertheless, other assets in this category include the components for the hypervisor, compute servers, storage array, networking, and the VMware vCenter that manage the hypervisor components. This HPE GreenLake API must maintain the inventory of all the assets that are protected by querying the vCenter.
 
 ![GLBR architecture 2](/img/glbr-architecture-overview-2.png)
 
@@ -443,7 +443,7 @@ Once the protection policy named "VMware create three tiers" was bound to the vi
 
 The below list detailed the required steps:
 
-1. I figured out the protection-job-id that is associated with “0-Linux-Demo-VM02.” and the  cloud backup schedule Id of the virtual machine. To achieve that, I used the HPE GreenLake [API](`https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList`) for Backup and Recovery `GET /backup-recovery/v1beta1/protection-jobs` and `filter “assetInfo/id eq {VM-id}”` as shown below. Note that the variable **{vmId}** contained the value of the virtual machine id as discovered in previous step, namely **"\<virtual-machine-id\>"**. The response body’s JSON structure contained the id of the protection job associated with **“0-Linux-Demo-VM02”**. From the same response body, I recognized that cloud protection is the **scheduleId no 3.**. The API used for this: 
+1. I figured out the protection-job-id that is associated with “0-Linux-Demo-VM02.” and the  cloud backup schedule Id of the virtual machine. To achieve that, I used the HPE GreenLake [API](`https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList`) for Backup and Recovery `GET /backup-recovery/v1beta1/protection-jobs` and `filter “assetInfo/id eq {VM-id}”` as shown below. Note that the variable **{vmId}** contained the value of the virtual machine id as discovered in previous step, namely **"<virtual-machine-id>"**. The response body’s JSON structure contained the id of the protection job associated with **“0-Linux-Demo-VM02”**. From the same response body, I recognized that cloud protection is the **scheduleId no 3.**. The API used for this: 
    `GET /backup-recovery/v1beta1/protection-jobs?filter=assetInfo/id eq {{vmId}}&select=assetInfo,id,operational,protections`. 
 
 ![API to figure out protection-jobs](/img/api-to-figure-out-protection-jobs.png)
@@ -458,7 +458,7 @@ The below list detailed the required steps:
    "﻿ScheduleIds: [3]
    }`
 
-> **Note** that there was a key called **“fullBackup”** inside the JSON request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. I also entered number 3 into **ScheduleIds** JSON array, to represent the cloud backup schedule. The below figure shows an example of the execution of **run now** without full backup protection of the third schedule which is cloud protection of this virtual machine. The value **\<protection-jobs-id\>** will be entered from the parameter of this API in this manner: 
+> **Note** that there was a key called **“fullBackup”** inside the JSON request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. I also entered number 3 into **ScheduleIds** JSON array, to represent the cloud backup schedule. The below figure shows an example of the execution of **run now** without full backup protection of the third schedule which is cloud protection of this virtual machine. The value **<protection-jobs-id>** will be entered from the parameter of this API in this manner: 
 >    `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`
 
 ![API to execute a protection run](/img/api-to-execute-a-protection.png)
@@ -480,7 +480,7 @@ Each of the recovery points regardless of the location of store (array snapshot,
 ![API to discover backup for recovery of VM](/img/api-to-discover-vm-for-recovery.png)
 
 2. Obtain the Cloud Recovery Protection Id from the for the cloud protection recovery from the virtual machine using the GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineBackupList/) `GET /backup-recovery/v1beta1/virtual-machines/:id/backups` given the virtual machine id. Copy the “{{backupId}}” from the response body from the below figure. API used for this: 
-`GET /backup-recovery/v1beta1/virtual-machines/{{vmId}}/backups?select=name,description,backupType,id`
+   `GET /backup-recovery/v1beta1/virtual-machines/{{vmId}}/backups?select=name,description,backupType,id`
 
 ![API to obtain the backup Id of a cloud recovery point](/img/api-to-obtain-backup-id-for-recovery.png)
 
