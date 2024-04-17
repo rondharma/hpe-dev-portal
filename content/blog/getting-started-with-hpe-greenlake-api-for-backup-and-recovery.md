@@ -396,13 +396,15 @@ The list of the steps to create this protection policy:
 
 Next in the list of use cases for this blog post, I followed the progression for the day one activities. The next one is to protect a virtual machine which is applying this protection policy to a virtual machine (or any other assets). The steps required to apply the protection policy against a virtual machine are listed below:
 
-1. I obtained the values from **virtual machine id, name, and type** keys which were going to be used as the key-pair values required for the key **assetInfo** as shown in below figures. To obtain those, I used the HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/tag/virtual-machines/) for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02”. The API used for this: `GET /virtualization/v1beta1/virtual-machines?sort=name desc&select=appType,id,name,type,guestInfo,protectionJobInfo&filter=name eq '0-Linux-Demo-VM02'`.
+1. I obtained the values from **virtual machine id, name, and type** keys which were going to be used as the key-pair values required for the key **assetInfo** as shown in below figures. To obtain those, I used the HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/tag/virtual-machines/) for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02”. The API used for this: 
+```GET /virtualization/v1beta1/virtual-machines?sort=name desc&select=appType,id,name,type,guestInfo,protectionJobInfo&filter=name eq '0-Linux-Demo-VM02'
+```
 
 ![API to find virtual-machines and it's properties](/img/api-find-virtual-machines.png)
 
 2. I created a JSON structure of a request body for applying the protection policy against a virtual machine without a protection group to make a simple example for this blog post. Note that this JSON body structure created the association of the asset, which is a virtual machine, against the protection policy. The two other parameters entered here were the consistency **(CRASH vs APPLICATION)** and technology for protection **(VMWARE_CBT vs VOLUME)**. The three values obtained from previous response of the previous API `POST /backup-recovery/v1beta1/protection-policies` associated with SNAPSHOT, BACKUP and CLOUD would be used as part of this request body. Each of this protection will be identified with schedule id marked 1,2 and 3 as shown below. There are other options available as part of this JSON structure of this request body, and they are documented in the Payload tab of this interactive guide for this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobCreate/).
 
-> **Note:** As of March 2024, value of type from *virtualization/virtual-machine* was translated to *hybrid-cloud/virtual-machine*. Note
+> **Note:** As of March 2024, value of type from *virtualization/virtual-machine* was translated to *hybrid-cloud/virtual-machine*.
 
 ```json
 {
