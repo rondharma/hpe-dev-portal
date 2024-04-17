@@ -504,9 +504,9 @@ Each of the recovery points regardless of the location of store (array snapshot,
 
 1. This API requires a request body of JSON structure as documented in the HPE GreenLake developer website. In this blog post, I planned a demo of the steps to recover the virtual machine from a copy that had existed in the HPE Cloud Protection Store into the VMware cluster where the Protection Storage Gateway is hosted (recover as a new virtual machine). The API used for this: 
 
-```shellsession
-GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-Linux-Demo-VM02’&select=appType,id,name,type,guestinfo,protectionJobInfo
-```
+   ```shellsession
+   GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-Linux-Demo-VM02’&select=appType,id,name,type,guestinfo,protectionJobInfo
+   ```
 
 ![API to discover backup for recovery of VM](/img/api-to-discover-vm-for-recovery.png)
 
@@ -555,8 +555,6 @@ GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-L
    ```shellsession
    GET /data-services/v1beta1/async-operations/:id?select=associatedResources,createdAt,endedAt,error,displayName,healthStatus,id,customerId,progressPercent,name,type,state
    ```
-
-
 
 ![Task Id confirming the completion of the recovery](/img/task-display-recovery-is-completed.png)
 
