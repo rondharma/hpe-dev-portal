@@ -394,8 +394,8 @@ Next in the list of use cases for this blog post, I followed the progression for
 
 1. I obtained the values from **virtual machine id, name, and type** keys which were going to be used as the key-pair values required for the key **assetInfo** as shown in below figures. To obtain those, I used the HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/tag/virtual-machines/) for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02”. The API used for this: 
 
-```GET
-
+```shellsession
+GET /virtualization/v1beta1/virtual-machines?sort=name desc& select=appType,id,name,type,guestInfo,protectionJobInfo& filter=name eq '0-Linux-Demo-VM02'
 ```
 
 ![API to find virtual-machines and it's properties](/img/api-find-virtual-machines.png)
@@ -513,7 +513,7 @@ GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-L
 2. Obtain the Cloud Recovery Protection Id from the for the cloud protection recovery from the virtual machine using the GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineBackupList/) 'GET /backup-recovery/v1beta1/virtual-machines/:id/backups` given the virtual machine id. Copy the “{{backupId}}” from the response body from the below figure. The API used for this:
 
 `﻿``shellsession
-GET /backup-recovery/v1beta1/virtual-machines/{{vmId}}/backups?select=name,description,backupType,id`
+GET /backup-recovery/v1beta1/virtual-machines/{{vmId}}/backups?select=name,description,backupType,id
 `﻿``
 
 ![API to obtain the backup Id of a cloud recovery point](/img/api-to-obtain-backup-id-for-recovery.png)
