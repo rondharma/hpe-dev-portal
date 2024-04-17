@@ -526,11 +526,12 @@ GET /virtualization/v1beta1/datastores?filter=displayName eq '0-BRS-VMFS-Test3'&
 
 ![API to obtain the cluster and datastore Ids](/img/api-obtain-cluster-and-datastore.png)
 
-4. To obtain the hypervisor Network Id that is required to recover the recovery point into a new virtual machine, I had to discover the hypervisor id. The [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/HypervisorManagerList/) used for this: 
+4. To obtain the hypervisor Network Id that is required to recover the recovery point into a new virtual machine, I had to discover the hypervisor id. The [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/HypervisorManagerList/) used for this:
 
-`﻿``shellsession
-GET /virtualization/v1beta1/hypervisor-managers?select=name,id,state,status,dataOrchestratorInfo,services,hypervisorManagerType,releaseVersion&filter=state eq "OK" and status eq "OK" and name eq "vCenter Name"
-`﻿``
+
+
+GET /virtualization/v1beta1/hypervisor-manager?select=name,id,state,status,dataOrchestratorInfo,services,hypervisorManagerType,releaseVersion&filter=state eq "OK" and status eq "OK" and name eq "vCenter Name"
+
 
 ![API to get hypervisorId](/img/api-obtain-hypervisor-id.png)
 
