@@ -528,7 +528,10 @@ select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'`.
 
 ![API to recover a cloud protection copy from a VM](/img/api-restoring-a-cloud-protection-recovery-point.png)
 
-7. To validate that the recovery was completed, and I tracked the progress from the response using the async-operations API as shown below. The API used for this: `GET /data-services/v1beta1/async-operations/:id?select=associatedResources,createdAt,endedAt,error,displayName,healthStatus,id,customerId,progressPercent,name,type,state`.
+7. To validate that the recovery was completed, and I tracked the progress from the response using the async-operations API as shown below. The API used for this: 
+```shellsession
+GET /data-services/v1beta1/async-operations/:id?select=associatedResources,createdAt,endedAt,error,displayName,healthStatus,id,customerId,progressPercent,name,type,state
+```
 
 ![Task Id confirming the completion of the recovery](/img/task-display-recovery-is-completed.png)
 
