@@ -171,7 +171,7 @@ The list of the steps to create this protection policy:
 
 4. I repeat the same execution of the `GET /backup-recovery/v1beta1/protection-stores` to obtain the **“<cloud-protection-store-id>”**. To accomplish that, I used the following `filter: protectionStoreType eq 'CLOUD' and storageSystemInfo/id eq “<protection-store-gateway-id>”`.  Additionally, I also used the  parameter `select: name,displayName,id,status,state,protectionStoreType` to provide shorter response for simpler discovery of the protection-store-id in the cloud. The API used for this: 
 
-   ```
+   ```shellsession
    GET /backup-recovery/v1beta1/protection-stores?select=name,displayName,id,status,state,protectionStoreType&filter=protectionStoreType eq ‘CLOUD’ and storageSystemInfo/id eq “\<protection-store-gateway-id\>.”
    ```
 
@@ -275,7 +275,7 @@ The list of the steps to create this protection policy:
 
 7. The below figure shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids for different protection tiers that will be used for the next example.
 
-   ```
+   ```yaml
    ID: “<protection-policies-id>"
    SNAPSHOT: “<snapshot-protection-id>”
    ON-PREMISES: “<onprem-protection-id>”
@@ -459,7 +459,7 @@ Next in the list of use cases for this blog post, I followed the progression for
 > }
 > ```
 
-3. In the figure below, I used HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobCreate/) for Backup and Recovery `POST /backup-recovery/v1beta1/protection-jobs` with the body JSON structure from the above so that I could associate the protection policy against a virtual machine. This POST API execution completed asynchronously and returned Status **0x202** with a response. The response header contained the `{{taskId}}` that I can use to ensure that this API completed properly.
+3. In the figure below, I used HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobCreate/) for Backup and Recovery `POST /backup-recovery/v1beta1/protection-jobs` with the body JSON structure from the above so that I could associate the protection policy against a virtual machine. This POST API execution completed asynchronously and returned Status `0x202` with a response. The response header contained the `{{taskId}}` that I can use to ensure that this API completed properly.
 
 ![API to apply protection policy against the VM](/img/api-applying-the-protection-jobs-against-a-vm.png)
 
