@@ -478,8 +478,7 @@ The below list detailed the required steps:
    "﻿ScheduleIds: [3]
    }`
 
-> **Note** that there was a key called **“fullBackup”** inside the JSON request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. I also entered number 3 into **ScheduleIds** JSON array, to represent the cloud backup schedule. The below figure shows an example of the execution of **run now** without full backup protection of the third schedule which is cloud protection of this virtual machine. The value **<protection-jobs-id>** will be entered from the parameter of this API in this manner: 
->    `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`.
+> **Note** that there was a key called **“fullBackup”** inside the JSON request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. I also entered number 3 into **ScheduleIds** JSON array, to represent the cloud backup schedule. The below figure shows an example of the execution of **run now** without full backup protection of the third schedule which is cloud protection of this virtual machine. The value **\<protection-jobs-id\>** will be entered from the parameter of this API in this manner: `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`.
 
 ![API to execute a protection run](/img/api-to-execute-a-protection.png)
 
@@ -487,7 +486,7 @@ The below list detailed the required steps:
 
 ![API async-operations of execution of protection-jobs](/img/api-task-list-after-a-run-execution.png)
 
-\> The activities above were validated from the HPE GreenLake Backup and Recovery list of the recovery points as shown in the below figure.
+The activities above were validated from the HPE GreenLake Backup and Recovery list of the recovery points as shown in the below figure.
 
 ![GUI display the completed cloud protection run](/img/gui-cloud-run-now-completed-succesfully.png)
 
@@ -499,8 +498,7 @@ Each of the recovery points regardless of the location of store (array snapshot,
 
 ![API to discover backup for recovery of VM](/img/api-to-discover-vm-for-recovery.png)
 
-2. Obtain the Cloud Recovery Protection Id from the for the cloud protection recovery from the virtual machine using the GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineBackupList/) `GET /backup-recovery/v1beta1/virtual-machines/:id/backups` given the virtual machine id. Copy the “{{backupId}}” from the response body from the below figure. The API used for this: 
-   `GET /backup-recovery/v1beta1/virtual-machines/{{vmId}}/backups?select=name,description,backupType,id`.
+2. Obtain the Cloud Recovery Protection Id from the for the cloud protection recovery from the virtual machine using the GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineBackupList/) `GET /backup-recovery/v1beta1/virtual-machines/:id/backups` given the virtual machine id. Copy the “{{backupId}}” from the response body from the below figure. The API used for this: `GET /backup-recovery/v1beta1/virtual-machines/{{vmId}}/backups?select=name,description,backupType,id`.
 
 ![API to obtain the backup Id of a cloud recovery point](/img/api-to-obtain-backup-id-for-recovery.png)
 
