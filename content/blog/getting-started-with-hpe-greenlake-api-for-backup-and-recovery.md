@@ -109,7 +109,7 @@ The list of the steps to perform this use case using HPE GreenLake API:
 
 ![Discover deployed StoreOnce to create cloud protection store](/img/api-discover-storeonce.png)
 
-2. Next, I discovered the cloud storage at the correct location from the list of the available storage location and copy the **storageLocationId** as shown in below JSON response body. The discovery was done by using a HPE GreenLake API from the data services [set](https://developer.greenlake.hpe.com/docs/greenlake/services/data-services/public/guide/). Note from the below figure that I used filter **“backup-and-recovery”** in capabilities to capture selected storage locations with the correct capability. The below figure shows information about the location (region) where the data will be stored; conversely, it’s located at **“Richmond”**, cloud service provide was **“AZURE”**, and cloud services provider identification is **“eastus2”**. The API used for this: `GET /data-services/v1beta1/storage-locations?filter=”backup-and-recovery” in capabilities`. 
+2. Next, I discovered the cloud storage at the correct location from the list of the available storage location and copy the `storageLocationId` as shown in below JSON response body. The discovery was done by using a HPE GreenLake API from the data services [set](https://developer.greenlake.hpe.com/docs/greenlake/services/data-services/public/guide/). Note from the below figure that I used filter `“backup-and-recovery”` in capabilities to capture selected storage locations with the correct capability. The below figure shows information about the location (region) where the data will be stored; conversely, it’s located at `“Richmond”`, cloud service provide was `“AZURE”`, and cloud services provider identification is `“eastus2”`. The API used for this: `GET /data-services/v1beta1/storage-locations?filter=”backup-and-recovery” in capabilities`.
 
 ![API to figure out the Azure storage location](/img/figure-out-storage-location.png)
 
@@ -483,7 +483,7 @@ The below list detailed the required steps:
 
 ![API to figure out protection-jobs](/img/api-to-figure-out-protection-jobs.png)
 
-2. This use case is equivalent to run now button at the schedule of the `“0-Linux-Demo-V02”` on the selected cloud protection as shown in below figure. After clicking “Run Now” button, a cloud protection will commence against the virtual machine, a recovery point is going to be created at the cloud protection store. On next step, I will invoke **Run Now** on the **HPE Cloud Protection Store** using HPE GreenLake API for Backup and Recovery.
+2. This use case is equivalent to run now button at the schedule of the `“0-Linux-Demo-V02”` on the selected cloud protection as shown in below figure. After clicking `“Run Now”` button, a cloud protection will commence against the virtual machine, a recovery point is going to be created at the cloud protection store. On next step, I will invoke `"Run Now"` on the `HPE Cloud Protection Store` using HPE GreenLake API for Backup and Recovery.
 
 ![UI for run now protection jobs](/img/gui-run-now-cloud-protection.png)
 
@@ -496,7 +496,7 @@ The below list detailed the required steps:
    }
    ```
 
-> **Note** that there was a key called **“fullBackup”** inside the JSON request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. I also entered number 3 into **ScheduleIds** JSON array, to represent the cloud backup schedule. The below figure shows an example of the execution of **run now** without full backup protection of the third schedule which is cloud protection of this virtual machine. The value **<protection-jobs-id>** will be entered from the parameter of this API in this manner: `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`.
+> **Note** that there was a key called `“fullBackup”` inside the JSON request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. I also entered number 3 into `ScheduleIds` JSON array, to represent the cloud backup schedule. The below figure shows an example of the execution of `"run now"` without full backup protection of the third schedule which is cloud protection of this virtual machine. The value `<protection-jobs-id>` will be entered from the parameter of this API in this manner: `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`.
 
 ![API to execute a protection run](/img/api-to-execute-a-protection.png)
 
@@ -520,7 +520,7 @@ Each of the recovery points regardless of the location of store (array snapshot,
 
 ![API to discover backup for recovery of VM](/img/api-to-discover-vm-for-recovery.png)
 
-2. Obtain the Cloud Recovery Protection Id from the for the cloud protection recovery from the virtual machine using the GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineBackupList/) 'GET /backup-recovery/v1beta1/virtual-machines/:id/backups` given the virtual machine id. Copy the “{{backupId}}” from the response body from the below figure. The API used for this:
+2. Obtain the Cloud Recovery Protection Id from the for the cloud protection recovery from the virtual machine using the GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineBackupList/) 'GET /backup-recovery/v1beta1/virtual-machines/:id/backups` given the virtual machine id. Copy the `“{{backupId}}”` from the response body from the below figure. The API used for this:
 
    ```shellsession
    GET /backup-recovery/v1beta1/virtual-machines/{{vmId}}/backups?select=name,description,backupType,id
@@ -528,7 +528,7 @@ Each of the recovery points regardless of the location of store (array snapshot,
 
 ![API to obtain the backup Id of a cloud recovery point](/img/api-to-obtain-backup-id-for-recovery.png)
 
-3. Obtain the **datastore id** and the **cluster id** from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/DatastoresList) 'GET /virtualization/v1beta1/datastores`. The API used for this:
+3. Obtain the `datastore id` and the `cluster id` from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name `“0-BRS-VMFS-Test3”` and enter that as the filter into HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/DatastoresList) 'GET /virtualization/v1beta1/datastores`. The API used for this:
 
    ```shellsession
    GET /virtualization/v1beta1/datastores?filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,id
@@ -544,7 +544,7 @@ Each of the recovery points regardless of the location of store (array snapshot,
 
 ![API to get hypervisorId](/img/api-obtain-hypervisor-id.png)
 
-5. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/HypervisorNetwork/): 
+5. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine `"0-Linux-Demo-V02"`, discovered the network port group `“Mgmt-DPortGroup”`, and obtained the network id. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/HypervisorNetwork/): 
 
    ```shellsession
    GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'
@@ -552,7 +552,7 @@ Each of the recovery points regardless of the location of store (array snapshot,
 
 ![API to get network ID for VM](/img/api-to-get-the-network-id.png)
 
-6. After I obtained the parameters that were required to build the request body to recover a cloud recovery point from “0-Linux-Demo-VM02’, I constructed the JSON request body as shown in the below figure. To restore the recovery points into a new virtual machine, the restoreType key of the request body JSON structure was set to “ALTERNATE” as shown in the below figure. I also provided the new virtual machine name after the recovery, “0-Linux-Demo-VN02-2-05-04-2024_05:48_PM”. The [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineRestore/) used for this:
+6. After I obtained the parameters that were required to build the request body to recover a cloud recovery point from `“0-Linux-Demo-VM02"`, I constructed the JSON request body as shown in the below figure. To restore the recovery points into a new virtual machine, the `restoreType` key of the request body JSON structure was set to `“ALTERNATE”` as shown in the below figure. I also provided the new virtual machine name after the recovery, `“0-Linux-Demo-VN02-2-05-04-2024_05:48_PM”`. The [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineRestore/) used for this:
 
    ```shellsession
    POST /backup-recovery/v1beta1/virtual-machines/{{vmId}}/restore
