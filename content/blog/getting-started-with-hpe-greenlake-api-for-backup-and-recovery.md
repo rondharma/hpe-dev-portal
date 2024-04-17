@@ -487,7 +487,7 @@ The below list detailed the required steps:
 
 ![API async-operations of execution of protection-jobs](/img/api-task-list-after-a-run-execution.png)
 
-The activities above were validated from the HPE GreenLake Backup and Recovery list of the recovery points as shown in the below figure.
+\> The activities above were validated from the HPE GreenLake Backup and Recovery list of the recovery points as shown in the below figure.
 
 ![GUI display the completed cloud protection run](/img/gui-cloud-run-now-completed-succesfully.png)
 
