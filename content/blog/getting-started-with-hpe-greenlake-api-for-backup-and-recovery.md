@@ -489,7 +489,7 @@ The below list detailed the required steps:
 
 3. The GreenLake API to accomplish the use case above was `POST /backup-recovery/v1beta1/protection-jobs/:id/run`, and the documentation of this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobRun) also list the required JSON structure for the request body. I created a JSON request body structure as the following:
 
-   ```
+   ```JSON
    {
       "﻿fullBackup": false,
       "﻿ScheduleIds": [3]
