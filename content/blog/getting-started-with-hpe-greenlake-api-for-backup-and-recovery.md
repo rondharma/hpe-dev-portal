@@ -539,7 +539,7 @@ GET /virtualization/v1beta1/hypervisor-manager?select=name,id,state,status,dataO
 
 ```shellsession
 GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'
-```
+`﻿``
 
 ![API to get network ID for VM](/img/api-to-get-the-network-id.png)
 
