@@ -10,10 +10,7 @@ tags:
   - greenlake-api
   - data-services-cloud-console
 ---
-![](<>)
-
 <style> li { font-size: 27px; line-height: 33px; max-width: none; } </style>
-
 ## W﻿hat's new?
 
 Recently, a new set of REST APIs for HPE GreenLake for Backup and Recovery Service was introduced in the HPE GreenLake Developer [website](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/). This is the third blog post from the series of blog postings ([Data-Services](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-data-services), [Virtualization](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-virtualization), [Backup and Recovery](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-backup-and-recovery), and Private Cloud Business Edition) that introduce some useful tips and best practices about using this new set of APIs given a specific use case. 
