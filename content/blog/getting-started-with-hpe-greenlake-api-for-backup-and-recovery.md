@@ -471,11 +471,11 @@ Next in the list of use cases for this blog post, I followed the progression for
 
 ## Triggering a protection
 
-Once the protection policy named "VMware create three tiers" was bound to the virtual machine as shown above, I then issued a trigger to create cloud protection against the virtual machine `“0-Linux-Demo-VM02”` to create one-off cloud-protection. 
+Once the protection policy named "VMware create three tiers" was bound to the virtual machine as shown above, I then issued a trigger to create cloud protection against the virtual machine `“0-Linux-Demo-VM02”` to create one-off cloud-protection.
 
 The below list detailed the required steps:
 
-1. I figured out the protection-job-id that is associated with “0-Linux-Demo-VM02.” and the  cloud backup schedule Id of the virtual machine. To achieve that, I used the HPE GreenLake [API](`https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList`) for Backup and Recovery `GET /backup-recovery/v1beta1/protection-jobs` and `filter assetInfo/id eq "{VM-id}”` as shown below. Note that the variable `{vmId}` contained the value of the virtual machine id as discovered in previous step, namely `"<virtual-machine-id>"`. The response body’s JSON structure contained the id of the protection job associated with `“0-Linux-Demo-VM02”`. From the same response body, I recognized that cloud protection is the `scheduleId no 3`. The API used for this:
+1. I figured out the protection-job-id that is associated with `“0-Linux-Demo-VM02”`. and the  cloud backup schedule Id of the virtual machine. To achieve that, I used the HPE GreenLake [API](`https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList`) for Backup and Recovery `GET /backup-recovery/v1beta1/protection-jobs` and `filter assetInfo/id eq "{VM-id}”` as shown below. Note that the variable `{vmId}` contained the value of the virtual machine id as discovered in previous step, namely `"<virtual-machine-id>"`. The response body’s JSON structure contained the id of the protection job associated with `“0-Linux-Demo-VM02”`. From the same response body, I recognized that cloud protection is the `scheduleId no 3`. The API used for this:
 
    ```shellsession
    GET /backup-recovery/v1beta1/protection-jobs?filter=assetInfo/id eq {{vmId}}&select=assetInfo,id,operational,protections
