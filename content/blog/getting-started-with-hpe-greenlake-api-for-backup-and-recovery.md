@@ -10,7 +10,8 @@ tags:
   - greenlake-api
   - data-services-cloud-console
 ---
-![]()
+![](<>)
+
 <style> li { font-size: 27px; line-height: 33px; max-width: none; } </style>
 
 ## W﻿hat's new?
@@ -144,9 +145,9 @@ A protection policy contain several JSON objects that are displayed in the below
 4. The pre-script information contains the link to the scripts to be executed prior to the creation of the copy.
 5. The post-script information contains the link to the scripts to be executed after the creation of the copy.
 
-!﻿[API JSON request body for protection](/img/api-body-json-request-for-protection-policies.png)
+![API request body JSON for protection policy creation](/img/api-body-json-request-for-protection-policies.png)
 
-*﻿ The above figure shows the protection-policies request body JSON structure*
+﻿*The above figure shows the protection-policies request body JSON structure*
 
 To simplify this example, I created a three-tier protection-policy for VMware as depicted by this snippet from the protection policy’s menu.
 
@@ -158,15 +159,15 @@ The list of the steps to create this protection policy:
 
 ![PSG UI](/img/psg-ui-to-show-the-serial-no.png)
 
-2. Afterward, I used `GET /backup-recovery/v1beta1/protection-store-gateways` [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreGatewaysList) to figure out the **"\<protection-store-gateway-id\>"** that was associated with the protection-stores that would be incorporated into the protection-policy.
+2. Afterward, I used `GET /backup-recovery/v1beta1/protection-store-gateways` [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreGatewaysList) to figure out the **"<protection-store-gateway-id>"** that was associated with the protection-stores that would be incorporated into the protection-policy.
 
 ![API show registered PSG](/img/api-display-registered-psg.png)
 
-3. From the figure below, I used `GET /backup-recovery/v1beta1/protection-stores` [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreList/) to obtain the protection-store ids for both the on-premises protection store and the cloud protection store. To display protection-stores related to the protection store gateway, I used the parameter filter to display the exact the protection-store associated with protection storage gateway of **“\<onprem-protection-store-id\>”**.  The filter parameter that I used are **protectionStoreType eq 'ON_PREMISES' and storageSystemInfo/id eq 'protection-store-gateway-id'**. Additionally, I used the following **select** parameter **name,displayName,id,status,state,protectionStoreType** to provide shorter response that simplify the discovery of the protection-store on-premises. The API used for this: `GET /backup-recovery/v1beta1/protection-stores?select=name,displayName,id,status,state,protectionStoreType&filter=protectionStoreType eq ‘ON_PREMISES’ and storageSystemInfo/id eq “\<protection-store-gateway-id\>”.` 
+3. From the figure below, I used `GET /backup-recovery/v1beta1/protection-stores` [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreList/) to obtain the protection-store ids for both the on-premises protection store and the cloud protection store. To display protection-stores related to the protection store gateway, I used the parameter filter to display the exact the protection-store associated with protection storage gateway of **“<onprem-protection-store-id>”**.  The filter parameter that I used are **protectionStoreType eq 'ON_PREMISES' and storageSystemInfo/id eq 'protection-store-gateway-id'**. Additionally, I used the following **select** parameter **name,displayName,id,status,state,protectionStoreType** to provide shorter response that simplify the discovery of the protection-store on-premises. The API used for this: `GET /backup-recovery/v1beta1/protection-stores?select=name,displayName,id,status,state,protectionStoreType&filter=protectionStoreType eq ‘ON_PREMISES’ and storageSystemInfo/id eq “\<protection-store-gateway-id\>”.` 
 
 ![API to obtain the onpremises protection store id](/img/api-to-get-onpremises-protection-store-id.png)
 
-4. I repeat the same execution of the `GET /backup-recovery/v1beta1/protection-stores` to obtain the **“<cloud-protection-store-id>”**. To accomplish that, I used the following **filter**: **protectionStoreType eq 'CLOUD' and storageSystemInfo/id eq “\<protection-store-gateway-id\>”**.  Additionally, I also used the  parameter **select: name,displayName,id,status,state,protectionStoreType** to provide shorter response for simpler discovery of the protection-store-id in the cloud. The API used for this: `GET /backup-recovery/v1beta1/protection-stores?select=name,displayName,id,status,state,protectionStoreType&filter=protectionStoreType eq ‘CLOUD’ and storageSystemInfo/id eq “\<protection-store-gateway-id\>.”`
+4. I repeat the same execution of the `GET /backup-recovery/v1beta1/protection-stores` to obtain the **“<cloud-protection-store-id>”**. To accomplish that, I used the following **filter**: **protectionStoreType eq 'CLOUD' and storageSystemInfo/id eq “<protection-store-gateway-id>”**.  Additionally, I also used the  parameter **select: name,displayName,id,status,state,protectionStoreType** to provide shorter response for simpler discovery of the protection-store-id in the cloud. The API used for this: `GET /backup-recovery/v1beta1/protection-stores?select=name,displayName,id,status,state,protectionStoreType&filter=protectionStoreType eq ‘CLOUD’ and storageSystemInfo/id eq “\<protection-store-gateway-id\>.”`
 
 ![API to obtain cloud protection store id](/img/api-discover-cloud-protection-store-id.png)
 
@@ -268,10 +269,10 @@ The list of the steps to create this protection policy:
 
 7. The below figure shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids for different protection tiers that will be used for the next example.
 
-* **ID: “\<protection-policies-id\>"**
-* **SNAPSHOT: “\<snapshot-protection-id\>”**
-* **ON-PREMISES: “\<onprem-protection-id\>”**
-* **CLOUD: “\<cloud-protection-id\>”**
+* **ID: “<protection-policies-id>"**
+* **SNAPSHOT: “<snapshot-protection-id>”**
+* **ON-PREMISES: “<onprem-protection-id>”**
+* **CLOUD: “<cloud-protection-id>”**
 
 > T﻿he full listing of the response body from `POST /backup-recovery/v1beta1/protection-policies`.
 
