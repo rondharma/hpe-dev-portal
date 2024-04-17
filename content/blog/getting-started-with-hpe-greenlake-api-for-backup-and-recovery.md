@@ -509,11 +509,9 @@ GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-L
 
 ![API to obtain the backup Id of a cloud recovery point](/img/api-to-obtain-backup-id-for-recovery.png)
 
-3. Obtain the **datastore id** and the **cluster id** from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/DatastoresList) 
-
-```
-GET /virtualization/v1beta1/datastores`. The API used for this: `GET /virtualization/v1beta1/datastores?filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,id
-```
+3. Obtain the **datastore id** and the **cluster id** from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/DatastoresList) 'GET /virtualization/v1beta1/datastores`. The API used for this: `GET /virtualization/v1beta1/datastores?
+filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,id
+`
 
 ![API to obtain the cluster and datastore Ids](/img/api-obtain-cluster-and-datastore.png)
 
@@ -521,7 +519,8 @@ GET /virtualization/v1beta1/datastores`. The API used for this: `GET /virtualiza
 
 ![API to get hypervisorId](/img/api-obtain-hypervisor-id.png)
 
-5. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/HypervisorNetwork/): `GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'`.
+5. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/HypervisorNetwork/): `GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?
+select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'`.
 
 ![API to get network ID for VM](/img/api-to-get-the-network-id.png)
 
