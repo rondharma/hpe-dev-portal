@@ -11,10 +11,11 @@ tags:
   - data-services-cloud-console
 ---
 ![]()
+<style> li { font-size: 27px; line-height: 33px; max-width: none; } </style>
 
 ## W﻿hat's new?
 
-Recently, a new set of REST APIs for HPE GreenLake for Backup and Recovery Services was introduced in the HPE GreenLake Developer [website](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/). This is the third blog post from the series of blog postings ([Data-Services](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-data-services), [Virtualization](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-virtualization), [Backup and Recovery](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-backup-and-recovery), and Private Cloud Business Edition) that introduce some useful tips and best practices about using this new set of APIs given a specific use case. This set of APIs provides capability for manipulation of resources made available by HPE GreenLake for Backup and Recovery services. Consequently, any customer can use these APIs to protect their data in hybrid cloud, as well as anyone can do, using the user interface for HPE GreenLake for Backup and Recovery in the HPE GreenLake console.  This set of API provides user capabilities to perform any of Create, Read, Update and Delete (CRUD) operations against HPE GreenLake Backup and Recovery resources such as: *data-orchestrator, protection store gateway, StoreOnce, protection-stores, protection-policies, snapshots, backups, on-premises assets (VM, DataStore, MSSQL, Storage Volumes).* There will be more resources that are going to be added into this set of APIs in the future releases that will cover *cloud service providers, and cloud assets*. For more information on how to use this HPE GreenLake for Backup and Recovery service, please visit the [website ](https://www.hpe.com/us/en/hpe-greenlake-backup-recovery.html)and the getting started [guide](https://support.hpe.com/hpesc/public/docDisplay?docLocale=en_US&docId=sd00003454en_us).  
+Recently, a new set of REST APIs for HPE GreenLake for Backup and Recovery Service was introduced in the HPE GreenLake Developer [website](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/). This is the third blog post from the series of blog postings ([Data-Services](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-data-services), [Virtualization](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-virtualization), [Backup and Recovery](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-backup-and-recovery), and Private Cloud Business Edition) that introduce some useful tips and best practices about using this new set of APIs given a specific use case. This set of APIs provides capability for manipulation of resources made available by HPE GreenLake for Backup and Recovery services. Consequently, any customer can use these APIs to protect their data in hybrid cloud, as well as anyone can do, using the user interface for HPE GreenLake for Backup and Recovery in the HPE GreenLake console.  This set of API provides user capabilities to perform any of Create, Read, Update and Delete (CRUD) operations against HPE GreenLake Backup and Recovery resources such as: *data-orchestrator, protection store gateway, StoreOnce, protection-stores, protection-policies, snapshots, backups, on-premises assets (VM, DataStore, MSSQL, Storage Volumes).* There will be more resources that are going to be added into this set of APIs in the future releases that will cover *cloud service providers, and cloud assets*. For more information on how to use this HPE GreenLake for Backup and Recovery service, please visit the [website ](https://www.hpe.com/us/en/hpe-greenlake-backup-recovery.html)and the getting started [guide](https://support.hpe.com/hpesc/public/docDisplay?docLocale=en_US&docId=sd00003454en_us).  
 
 The specification of this API is publicized as OpenAPI specification in JSON format, and the specification is available for download from this [section ](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/guide/)of the documentation as shown below. The specification follows the OpenAPI standard 3.1, and it contains all required information so that this JSON file can be consumed by any OpenAPI tools to provide client library, server mock, or documentation as described in this [OpenAPI ](https://tools.openapis.org/)Initiative.
 
@@ -107,7 +108,7 @@ The list of the steps to perform this use case using HPE GreenLake API:
 
 ![Discover deployed StoreOnce to create cloud protection store](/img/api-discover-storeonce.png)
 
-2. Next, I discovered the cloud storage at the correct location from the list of the available storage location and copy the storageLocationId as shown in below JSON request body. The discovery was done by using a HPE GreenLake API from the data services [set](https://developer.greenlake.hpe.com/docs/greenlake/services/data-services/public/guide/). Note from the below figure that I used filter “backup-and-recovery” in capabilities to capture selected storage locations with the correct capability. The below figure shows information about the location (region) where the data will be stored; conversely, it’s located at “Richmond”, cloud service provide was “AZURE”, and cloud services provider identification is “eastus2”. The API used for this: `GET /data-services/v1beta1/storage-locations?filter=”backup-and-recovery” in capabilities`
+2. Next, I discovered the cloud storage at the correct location from the list of the available storage location and copy the **storageLocationId** as shown in below JSON response body. The discovery was done by using a HPE GreenLake API from the data services [set](https://developer.greenlake.hpe.com/docs/greenlake/services/data-services/public/guide/). Note from the below figure that I used filter **“backup-and-recovery”** in capabilities to capture selected storage locations with the correct capability. The below figure shows information about the location (region) where the data will be stored; conversely, it’s located at **“Richmond”**, cloud service provide was **“AZURE”**, and cloud services provider identification is **“eastus2”**. The API used for this: `GET /data-services/v1beta1/storage-locations?filter=”backup-and-recovery” in capabilities`. 
 
 ![API to figure out the Azure storage location](/img/figure-out-storage-location.png)
 
@@ -115,14 +116,15 @@ The list of the steps to perform this use case using HPE GreenLake API:
 
 ![API composing the protection store](/img/api-compose-protection-store.png)
 
-> The complete information about [this](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/) JSON body structures is provided on the interactive documentation of 'POST /backup-recovery/v1beta1/protection-stores' under Payload tab.
+> The complete information about [this](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/) JSON body structures is provided on the interactive documentation of `POST /backup-recovery/v1beta1/protection-stores` under Payload tab.
 
 ![API Request body JSON to compose protection Store](/img/api-to-create-protection-stores-request-json-body.png)
 
-4. After roughly about 5 minutes, the cloud protection store was completely created based on response of the following GET /data-services/async-operations API as shown in the below figure. Note that I used a set of selection parameters in below figure to summarize the information from this task information: 
-   **GET /data-services/v1beta1/async-operations/{{taskId}}/select=associatedResources,createdAt,displayName,customerId,logMessages,progressPercent,state.**  I copied the task’s id from the response header’s location value of the prior API execution into a Postman’s variable called {{taskId}}, and incorporated taskId variable to the async-operations execution.
+4. After roughly about 5 minutes, the cloud protection store was completely created based on response of the following `GET /data-services/async-operations` [API](https://developer.greenlake.hpe.com/docs/greenlake/services/data-services/public/openapi/data-services-public-v1beta1/operation/GetAsyncOperation/) as shown in the below figure. 
 
-![Task completion on POST protectoin-stores](/img/api-async-on-post-protection-stores.png)
+   > ***Note:*** that I used a set of selection parameters in below figure to summarize the information from this task information: `GET /data-services/v1beta1/async-operations/{{taskId}}/select=associatedResources,createdAt,displayName,customerId,logMessages,progressPercent,state`.  I copied the task’s id from the response header’s location value of the prior API execution into a Postman’s variable called {{taskId}}, and incorporated {{taskId}} variable to the async-operations API execution. 
+
+![Task completion on POST protection-stores](/img/api-async-on-post-protection-stores.png)
 
 5. For reference, I went into the Protection Stores menu as shown in the below figure to show that HPE GreenLake Backup and Recovery, and confirmed that the desired protection store was available.
 
@@ -131,7 +133,8 @@ The list of the steps to perform this use case using HPE GreenLake API:
 ## Creating a Protection-Policy
 
 One of the common use-case that every user of HPE GreenLake Backup and Recovery will deploy is the creation of a protection-policy. This resource is important because it sets up the schedule for creation of recovery point; additionally, it sets up the flow of a recovery point from a primary storage to a storage snapshot, to on-premises protection-store and eventually to the cloud protection-store. 
-A protection policy contain several components:
+
+A protection policy contain several JSON objects that are displayed in the below figure.
 
 1. A Schedule that contains the frequency for creation of the copy and time to retain the copies.
 2. Protection store where the copies are stored: snapshot (in the primary array), on-premises store, and cloud store.
@@ -139,13 +142,17 @@ A protection policy contain several components:
 4. The pre-script information contains the link to the scripts to be executed prior to the creation of the copy.
 5. The post-script information contains the link to the scripts to be executed after the creation of the copy.
 
+!﻿[API JSON request body for protection ](/img/api-body-json-request-for-protection-policies.png)
+
+*﻿ The above figure shows the protection-policies request body JSON structure*
+
 To simplify this example, I created a three-tier protection-policy for VMware as depicted by this snippet from the protection policy’s menu.
 
 ![3 Tiers protection policy ](/img/backup-protection-policy-with-3-tiers.png)
 
 The list of the steps to create this protection policy:
 
-1. From the figure below, inside the protection store gateways menu, I discovered the serial number of the protection-store gateway as the filtering parameter to obtain the protection store gateway instance. 
+1. From the figure below, inside the protection store gateways menu, I discovered the serial number of the protection-store gateway and used it as the filtering parameter to obtain the protection store gateway instance.  
 
 ![PSG UI](/img/psg-ui-to-show-the-serial-no.png)
 
@@ -161,7 +168,7 @@ The list of the steps to create this protection policy:
 
 ![API to obtain cloud protection store id](/img/api-discover-cloud-protection-store-id.png)
 
-5. For the next step, I created a request body JSON structure that represents the protection policy schedule and each of the protection stores. Inside this JSON structures for request body, I defined the three objects that represent the SNAPSHOT, BACKUP (on-premises), CLOUD_BACKUP. Note that this structure can be expanded or contracted depending on the required backup strategy. The SNAPSHOT object did not require **"<protection-store-Id>"** as that recovery points will exist inside the primary storage array. This request JSON body structure was required to create the protection policy using HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/ProtectionStoreCreate/) `POST /backup-recovery/v1beta1/protection-policies`.
+5. For the next step, I created a request body JSON structure that represents the protection policy schedule and each of the protection stores. Inside this JSON structures for request body, I defined the three objects that represent the SNAPSHOT, BACKUP (on-premises), CLOUD_BACKUP. Note that this structure can be expanded or contracted depending on the required backup strategy. The SNAPSHOT object did not require **"<protection-store-Id>"** as that recovery points will exist inside the primary storage array. This request JSON body structure was required to create the protection policy using HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementTemplateCreate/) `POST /backup-recovery/v1beta1/protection-policies`.
 
 > ***Note:*** I didn’t include objects for immutability, prescript, and postscript into the JSON structure. If it’s not intended, you don’t need to include unused key-pair values into the JSON structure. Additionally, the SNAPSHOT object does no require a **protectionStoreId**.
 
@@ -251,7 +258,7 @@ The list of the steps to create this protection policy:
 }
 ```
 
-> The above figure shows JSON structure for request body of `POST /backup-recovery/v1beta1/protection-policies` for the creation of protection-policy as shown by the example in this section.
+> *The above figure shows JSON structure for request body of `POST /backup-recovery/v1beta1/protection-policies` for the creation of protection-policy as shown by the example in this section.*
 
 6. Finally, I created of the protection policies using the GreenLake API for Backup and Recovery `POST /backup-recovery/v1beta1/protection-policies`, and I used the above JSON structure in the request body. This is a special POST API execution where the response is returned immediately. The response of this API contained the body of JSON structure that will be useful to identify the protection-jobs such as the **“<protection-policies-id>”**
 
@@ -259,10 +266,10 @@ The list of the steps to create this protection policy:
 
 7. The below figure shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids for different protection tiers that will be used for the next example.
 
-* **ID: “<protection-policies-id>"**
-* **SNAPSHOT: “<snapshot-protection-id>”**
-* **ON-PREMISES: “<onprem-protection-id>”**
-* **CLOUD: “<cloud-protection-id>”**
+* **ID: “\<protection-policies-id\>"**
+* **SNAPSHOT: “\<snapshot-protection-id\>”**
+* **ON-PREMISES: “\<onprem-protection-id\>”**
+* **CLOUD: “\<cloud-protection-id\>”**
 
 > T﻿he full listing of the response body from `POST /backup-recovery/v1beta1/protection-policies`.
 
@@ -360,7 +367,7 @@ The list of the steps to create this protection policy:
                 "name": "Cloud_CDS-TPM-PSGno1_USA, North Virginia",
                 "type": "backup-recovery/protection-store",
                 "region": "USA, North Virginia",
-                "resourceUri": "/backup-recovery/v1beta1/protection-stores/25611df9-f136-424b-b447-aa3a4887869f",
+                "resourceUri": "/backup-recovery/v1beta1/protection-stores/25611df9-xxxx-xxxx-xxxx-aa3a4887869f",
                 "protectionStoreType": "CLOUD"
             },
             "type": "CLOUD_BACKUP"
@@ -372,8 +379,8 @@ The list of the steps to create this protection policy:
         "name": "ronald.dharma@hpe.com"
     },
     "generation": 1,
-    "resourceUri": "/backup-recovery/v1beta1/protection-policies/f572ce6e-3470-4149-bb5b-530284bf2bc4",
-    "consoleUri": "/backup-and-recovery/protection-policies/f572ce6e-3470-4149-bb5b-530284bf2bc4",
+    "resourceUri": "/backup-recovery/v1beta1/protection-policies/f572ce6e-xxxx-xxxx-xxxx-530284bf2bc4",
+    "consoleUri": "/backup-and-recovery/protection-policies/f572ce6e-xxxx-xxxx-xxxx-530284bf2bc4",
     "applicationType": "VMWARE",
     "type": "backup-recovery/protection-policy",
     "updatedAt": "2024-04-05T03:28:03.000000Z"
@@ -388,9 +395,9 @@ Next in the list of use cases for this blog post, I followed the progression for
 
 ![API to find virtual-machines and it's properties](/img/api-find-virtual-machines.png)
 
-2. I created a JSON structure of a request body for applying the protection policy against a virtual machine without a protection group to make a simple example for this blog post. Note that this JSON body structure created the association of the asset, which is a virtual machine, against the protection policy. The two other parameters entered here were the consistency **(CRASH vs APPLICATION)** and technology for protection **(VMWARE_CBT vs VOLUME)**. The three values obtained from previous response of the previous API `POST /backup-recovery/v1beta1/protection-policies` associated with SNAPSHOT, BACKUP and CLOUD would be used as part of this request body. Each of this protection will be identified with schedule id marked 1,2 and 3 as shown below. There are other options available as part of this JSON structure of this request body, and they are documented in this interactive guide for this API.
+2. I created a JSON structure of a request body for applying the protection policy against a virtual machine without a protection group to make a simple example for this blog post. Note that this JSON body structure created the association of the asset, which is a virtual machine, against the protection policy. The two other parameters entered here were the consistency **(CRASH vs APPLICATION)** and technology for protection **(VMWARE_CBT vs VOLUME)**. The three values obtained from previous response of the previous API `POST /backup-recovery/v1beta1/protection-policies` associated with SNAPSHOT, BACKUP and CLOUD would be used as part of this request body. Each of this protection will be identified with schedule id marked 1,2 and 3 as shown below. There are other options available as part of this JSON structure of this request body, and they are documented in the Payload tab of this interactive guide for this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobCreate/).
 
-   **Note:** As of March 2024, value of type from *virtualization/virtual-machine* was translated to *hybrid-cloud/virtual-machine*.
+> **Note:** As of March 2024, value of type from *virtualization/virtual-machine* was translated to *hybrid-cloud/virtual-machine*. Note
 
 ```json
 {
@@ -443,7 +450,7 @@ Next in the list of use cases for this blog post, I followed the progression for
 
 4. The API execution was executed successfully. I validated this completion using the task id that I obtained from the response headers as shown above. The API used for this: `GET /data-services/v1beta1/async-operations/{{taskId}}`
 
-   > **Note**: that that the execution of this API will trigger a protection execution right after the execution of this API completed.
+> **Note**: that that the execution of this API will trigger a protection execution right after the execution of this API completed.
 
 ![Task list to display completion of the application of protection policy against a VM producing protection jobs](/img/api-task-list-for-protection-policy-application.png)
 
@@ -469,7 +476,7 @@ The below list detailed the required steps:
    }`
 
 > **Note** that there was a key called **“fullBackup”** inside the JSON request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. I also entered number 3 into **ScheduleIds** JSON array, to represent the cloud backup schedule. The below figure shows an example of the execution of **run now** without full backup protection of the third schedule which is cloud protection of this virtual machine. The value **<protection-jobs-id>** will be entered from the parameter of this API in this manner: 
->    `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`
+>    `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`.
 
 ![API to execute a protection run](/img/api-to-execute-a-protection.png)
 
@@ -485,12 +492,12 @@ The activities above were validated from the HPE GreenLake Backup and Recovery l
 
 Each of the recovery points regardless of the location of store (array snapshot, On-Premises Protection-Store, or HPE Cloud Protection-Store) can be recovered using this GreenLake API: `POST /backup-recovery/v1beta1/virtual-machines/:id/restore`
 
-1. This API requires a request body of JSON structure as documented in the HPE GreenLake developer website. In this blog post, I planned a demo of the steps to recover the virtual machine from a copy that had existed in the HPE Cloud Protection Store into the VMware cluster where the Protection Storage Gateway is hosted (recover as a new virtual machine). API used for this: `GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-Linux-Demo-VM02’&select=appType,id,name,type,guestinfo,protectionJobInfo`
+1. This API requires a request body of JSON structure as documented in the HPE GreenLake developer website. In this blog post, I planned a demo of the steps to recover the virtual machine from a copy that had existed in the HPE Cloud Protection Store into the VMware cluster where the Protection Storage Gateway is hosted (recover as a new virtual machine). The API used for this: `GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-Linux-Demo-VM02’&select=appType,id,name,type,guestinfo,protectionJobInfo`.
 
 ![API to discover backup for recovery of VM](/img/api-to-discover-vm-for-recovery.png)
 
-2. Obtain the Cloud Recovery Protection Id from the for the cloud protection recovery from the virtual machine using the GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineBackupList/) `GET /backup-recovery/v1beta1/virtual-machines/:id/backups` given the virtual machine id. Copy the “{{backupId}}” from the response body from the below figure. API used for this: 
-   `GET /backup-recovery/v1beta1/virtual-machines/{{vmId}}/backups?select=name,description,backupType,id`
+2. Obtain the Cloud Recovery Protection Id from the for the cloud protection recovery from the virtual machine using the GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineBackupList/) `GET /backup-recovery/v1beta1/virtual-machines/:id/backups` given the virtual machine id. Copy the “{{backupId}}” from the response body from the below figure. The API used for this: 
+   `GET /backup-recovery/v1beta1/virtual-machines/{{vmId}}/backups?select=name,description,backupType,id`.
 
 ![API to obtain the backup Id of a cloud recovery point](/img/api-to-obtain-backup-id-for-recovery.png)
 
@@ -506,7 +513,7 @@ Each of the recovery points regardless of the location of store (array snapshot,
 
 ![API to get network ID for VM](/img/api-to-get-the-network-id.png)
 
-6. After I obtained the parameters that were required to build the request body to recover a cloud recovery point from “0-Linux-Demo-VM02’, I constructed the JSON request body as shown in the below figure. To restore the recovery points into a new virtual machine, the restoreType key of the request body JSON structure was set to “ALTERNATE” as shown in the below figure. I also provided the new virtual machine name after the recovery, “0-Linux-Demo-VN02-2-05-04-2024_05:48_PM”. The [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineRestore/) used for this: `POST /backup-recovery/v1beta1/virtual-machines/{{vmId}}/restore`
+6. After I obtained the parameters that were required to build the request body to recover a cloud recovery point from “0-Linux-Demo-VM02’, I constructed the JSON request body as shown in the below figure. To restore the recovery points into a new virtual machine, the restoreType key of the request body JSON structure was set to “ALTERNATE” as shown in the below figure. I also provided the new virtual machine name after the recovery, “0-Linux-Demo-VN02-2-05-04-2024_05:48_PM”. The [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/VirtualMachineRestore/) used for this: `POST /backup-recovery/v1beta1/virtual-machines/{{vmId}}/restore`.
 
 ![API to recover a cloud protection copy from a VM](/img/api-restoring-a-cloud-protection-recovery-point.png)
 
