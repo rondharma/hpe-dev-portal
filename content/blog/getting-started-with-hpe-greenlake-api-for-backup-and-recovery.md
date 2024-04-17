@@ -273,120 +273,120 @@ The list of the steps to create this protection policy:
 * **CLOUD: “<cloud-protection-id>”**
 
 > T﻿he full listing of the response body from `POST /backup-recovery/v1beta1/protection-policies` is shown in the below code snippet:
-
-```json
-{
-    "assigned": false,
-    "description": "Snapshot-local-cloud",
-    "id": "<protection-policies-id",
-    "name": "VMware create three tiers",
-    "protections": [
-        {
-            "id": "<snapshot-protection-id>",           
-            "schedules": [
-                {
-                    "scheduleId": 1,
-                    "name": "Array_Snapshot_1",
-                    "schedule": {
-                        "activeTime": {
-                            "activeFromTime": "00:00",
-                            "activeUntilTime": "23:59"
-                        },
-                        "recurrence": "HOURLY",
-                        "repeatInterval": {
-                            "every": 4
-                        }
-                    },
-                    "expireAfter": {
-                        "unit": "DAYS",
-                        "value": 1
-                    },
-                    "namePattern": {
-                        "format": "Array_Snapshot_{DateFormat}"
-                    }
-                }
-            ],
-            "type": "SNAPSHOT"
-        },
-        {
-            "id": "<onprem-protection-id>",
-            "schedules": [
-                {
-                    "scheduleId": 2,
-                    "sourceProtectionScheduleId": 1,
-                    "name": "On-Premises_Protection_Store_2",
-                    "schedule": {
-                        "recurrence": "DAILY",
-                        "repeatInterval": {
-                            "every": 1
-                        },
-                        "startTime": "00:00"
-                    },
-                    "expireAfter": {
-                        "unit": "DAYS",
-                        "value": 3
-                    },
-                    "namePattern": {
-                        "format": "On-Premises_Protection_Store_{DateFormat}"
-                    }
-                }
-            ],
-            "protectionStoreInfo": {
-                "id": "onprem-protectio-store-id",
-                "name": "Local_CDS-TPM-PSG#1",
-                "type": "backup-recovery/protection-store",
-                "resourceUri": "/backup-recovery/v1beta1/protection-stores/501a99e7-fb79-4fd7-89d5-a5dfb3441859",
-                "protectionStoreType": "ON_PREMISES"
-            },
-            "type": "BACKUP"
-        },
-        {
-            "id": “<cloud-protection-id>”,
-            "schedules": [
-                {
-                    "scheduleId": 3,
-                    "sourceProtectionScheduleId": 2,
-                    "name": "HPE_Cloud_Protection_Store_3",
-                    "schedule": {
-                        "recurrence": "DAILY",
-                        "repeatInterval": {
-                            "every": 2
-                        },
-                        "startTime": "00:00"
-                    },
-                    "expireAfter": {
-                        "unit": "WEEKS",
-                        "value": 1
-                    },
-                    "namePattern": {
-                        "format": "HPE_Cloud_Protection_Store_{DateFormat}"
-                    }
-                }
-            ],
-            "protectionStoreInfo": {
-                "id": "cloud-protection-store-id",
-                "name": "Cloud_CDS-TPM-PSGno1_USA, North Virginia",
-                "type": "backup-recovery/protection-store",
-                "region": "USA, North Virginia",
-                "resourceUri": "/backup-recovery/v1beta1/protection-stores/25611df9-xxxx-xxxx-xxxx-aa3a4887869f",
-                "protectionStoreType": "CLOUD"
-            },
-            "type": "CLOUD_BACKUP"
-        }
-    ],
-    "createdAt": "2024-04-05T03:28:03.000000Z",
-    "createdBy": {
-        "id": "<user-id>",
-        "name": "ronald.dharma@hpe.com"
-    },
-    "generation": 1,
-    "resourceUri": "/backup-recovery/v1beta1/protection-policies/f572ce6e-xxxx-xxxx-xxxx-530284bf2bc4",
-    "consoleUri": "/backup-and-recovery/protection-policies/f572ce6e-xxxx-xxxx-xxxx-530284bf2bc4",
-    "applicationType": "VMWARE",
-    "type": "backup-recovery/protection-policy",
-    "updatedAt": "2024-04-05T03:28:03.000000Z"
-}
-```
+>
+> ```jsonc
+> {
+>     "assigned": false,
+>     "description": "Snapshot-local-cloud",
+>     "id": "<protection-policies-id",
+>     "name": "VMware create three tiers",
+>     "protections": [
+>         {
+>             "id": "<snapshot-protection-id>",           
+>             "schedules": [
+>                 {
+>                     "scheduleId": 1,
+>                     "name": "Array_Snapshot_1",
+>                     "schedule": {
+>                         "activeTime": {
+>                             "activeFromTime": "00:00",
+>                             "activeUntilTime": "23:59"
+>                         },
+>                         "recurrence": "HOURLY",
+>                         "repeatInterval": {
+>                             "every": 4
+>                         }
+>                     },
+>                     "expireAfter": {
+>                         "unit": "DAYS",
+>                         "value": 1
+>                     },
+>                     "namePattern": {
+>                         "format": "Array_Snapshot_{DateFormat}"
+>                     }
+>                 }
+>             ],
+>             "type": "SNAPSHOT"
+>         },
+>         {
+>             "id": "<onprem-protection-id>",
+>             "schedules": [
+>                 {
+>                     "scheduleId": 2,
+>                     "sourceProtectionScheduleId": 1,
+>                     "name": "On-Premises_Protection_Store_2",
+>                     "schedule": {
+>                         "recurrence": "DAILY",
+>                         "repeatInterval": {
+>                             "every": 1
+>                         },
+>                         "startTime": "00:00"
+>                     },
+>                     "expireAfter": {
+>                         "unit": "DAYS",
+>                         "value": 3
+>                     },
+>                     "namePattern": {
+>                         "format": "On-Premises_Protection_Store_{DateFormat}"
+>                     }
+>                 }
+>             ],
+>             "protectionStoreInfo": {
+>                 "id": "onprem-protectio-store-id",
+>                 "name": "Local_CDS-TPM-PSG#1",
+>                 "type": "backup-recovery/protection-store",
+>                 "resourceUri": "/backup-recovery/v1beta1/protection-stores/501a99e7-fb79-4fd7-89d5-a5dfb3441859",
+>                 "protectionStoreType": "ON_PREMISES"
+>             },
+>             "type": "BACKUP"
+>         },
+>         {
+>             "id": “<cloud-protection-id>”,
+>             "schedules": [
+>                 {
+>                     "scheduleId": 3,
+>                     "sourceProtectionScheduleId": 2,
+>                     "name": "HPE_Cloud_Protection_Store_3",
+>                     "schedule": {
+>                         "recurrence": "DAILY",
+>                         "repeatInterval": {
+>                             "every": 2
+>                         },
+>                         "startTime": "00:00"
+>                     },
+>                     "expireAfter": {
+>                         "unit": "WEEKS",
+>                         "value": 1
+>                     },
+>                     "namePattern": {
+>                         "format": "HPE_Cloud_Protection_Store_{DateFormat}"
+>                     }
+>                 }
+>             ],
+>             "protectionStoreInfo": {
+>                 "id": "cloud-protection-store-id",
+>                 "name": "Cloud_CDS-TPM-PSGno1_USA, North Virginia",
+>                 "type": "backup-recovery/protection-store",
+>                 "region": "USA, North Virginia",
+>                 "resourceUri": "/backup-recovery/v1beta1/protection-stores/25611df9-xxxx-xxxx-xxxx-aa3a4887869f",
+>                 "protectionStoreType": "CLOUD"
+>             },
+>             "type": "CLOUD_BACKUP"
+>         }
+>     ],
+>     "createdAt": "2024-04-05T03:28:03.000000Z",
+>     "createdBy": {
+>         "id": "<user-id>",
+>         "name": "ronald.dharma@hpe.com"
+>     },
+>     "generation": 1,
+>     "resourceUri": "/backup-recovery/v1beta1/protection-policies/f572ce6e-xxxx-xxxx-xxxx-530284bf2bc4",
+>     "consoleUri": "/backup-and-recovery/protection-policies/f572ce6e-xxxx-xxxx-xxxx-530284bf2bc4",
+>     "applicationType": "VMWARE",
+>     "type": "backup-recovery/protection-policy",
+>     "updatedAt": "2024-04-05T03:28:03.000000Z"
+> }
+> ```
 
 ## Applying protection policy to a Virtual Machine
 
@@ -394,60 +394,60 @@ Next in the list of use cases for this blog post, I followed the progression for
 
 1. I obtained the values from **virtual machine id, name, and type** keys which were going to be used as the key-pair values required for the key **assetInfo** as shown in below figures. To obtain those, I used the HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/tag/virtual-machines/) for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02”. The API used for this: 
 
-```shellsession
-GET /virtualization/v1beta1/virtual-machines?sort=name desc& select=appType,id,name,type,guestInfo,protectionJobInfo& filter=name eq '0-Linux-Demo-VM02'
-```
+   ```
+   GET /virtualization/v1beta1/virtual-machines?sort=name desc& select=appType,id,name,type,guestInfo,protectionJobInfo& filter=name eq '0-Linux-Demo-VM02'
+   ```
 
 ![API to find virtual-machines and it's properties](/img/api-find-virtual-machines.png)
 
 2. I created a JSON structure of a request body for applying the protection policy against a virtual machine without a protection group to make a simple example for this blog post. Note that this JSON body structure created the association of the asset, which is a virtual machine, against the protection policy. The two other parameters entered here were the consistency **(CRASH vs APPLICATION)** and technology for protection **(VMWARE_CBT vs VOLUME)**. The three values obtained from previous response of the previous API `POST /backup-recovery/v1beta1/protection-policies` associated with SNAPSHOT, BACKUP and CLOUD would be used as part of this request body. Each of this protection will be identified with schedule id marked 1,2 and 3 as shown below. There are other options available as part of this JSON structure of this request body, and they are documented in the Payload tab of this interactive guide for this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobCreate/).
 
 > **Note:** As of March 2024, value of type from *virtualization/virtual-machine* was translated to *hybrid-cloud/virtual-machine*.
-
-```json
-{
-   "assetInfo":{
-      "id": ”<virtual-machine-id>”,
-      "type":"hybrid-cloud/virtual-machine",
-      "name":"0-Linux-Demo-VM02"
-   },
-   "protectionPolicyId”: “<protection-policies-id>”,
-   "overrides":{
-      "protections":[
-         {
-            "id": “<snapshot-protection-id>”,
-            "schedules":[
-               {
-                  "scheduleId":1,
-                  "consistency":"CRASH",
-                  "backupGranularity":"VMWARE_CBT"
-               }
-            ]
-         },
-         {
-            "id": “<backup-protection-id>”,
-            "schedules":[
-               {
-                  "scheduleId":2,
-                  "consistency":"CRASH",
-                  "backupGranularity":"VMWARE_CBT"
-               }
-            ]
-         },
-         {
-            "id": “<cloud-protection-id>”,
-            "schedules":[
-               {
-                  "scheduleId":3,
-                  "consistency":"CRASH",
-                  "backupGranularity":"VMWARE_CBT"
-               }
-            ]
-         }
-      ]
-   }
-}
-```
+>
+> ```jsonc
+> {
+>    "assetInfo":{
+>       "id": ”<virtual-machine-id>”,
+>       "type":"hybrid-cloud/virtual-machine",
+>       "name":"0-Linux-Demo-VM02"
+>    },
+>    "protectionPolicyId”: “<protection-policies-id>”,
+>    "overrides":{
+>       "protections":[
+>          {
+>             "id": “<snapshot-protection-id>”,
+>             "schedules":[
+>                {
+>                   "scheduleId":1,
+>                   "consistency":"CRASH",
+>                   "backupGranularity":"VMWARE_CBT"
+>                }
+>             ]
+>          },
+>          {
+>             "id": “<backup-protection-id>”,
+>             "schedules":[
+>                {
+>                   "scheduleId":2,
+>                   "consistency":"CRASH",
+>                   "backupGranularity":"VMWARE_CBT"
+>                }
+>             ]
+>          },
+>          {
+>             "id": “<cloud-protection-id>”,
+>             "schedules":[
+>                {
+>                   "scheduleId":3,
+>                   "consistency":"CRASH",
+>                   "backupGranularity":"VMWARE_CBT"
+>                }
+>             ]
+>          }
+>       ]
+>    }
+> }
+> ```
 
 3. In the figure below, I used HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobCreate/) for Backup and Recovery `POST /backup-recovery/v1beta1/protection-jobs` with the body JSON structure from the above so that I could associate the protection policy against a virtual machine. This POST API execution completed asynchronously and returned Status **0x202** with a response. The response header contained the **{{taskId}}** that I can use to ensure that this API completed properly.
 
@@ -467,9 +467,9 @@ The below list detailed the required steps:
 
 1. I figured out the protection-job-id that is associated with “0-Linux-Demo-VM02.” and the  cloud backup schedule Id of the virtual machine. To achieve that, I used the HPE GreenLake [API](`https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList`) for Backup and Recovery `GET /backup-recovery/v1beta1/protection-jobs` and `filter “assetInfo/id eq {VM-id}”` as shown below. Note that the variable **{vmId}** contained the value of the virtual machine id as discovered in previous step, namely **"<virtual-machine-id>"**. The response body’s JSON structure contained the id of the protection job associated with **“0-Linux-Demo-VM02”**. From the same response body, I recognized that cloud protection is the **scheduleId no 3.**. The API used for this:
 
-````shellsession
-GET /backup-recovery/v1beta1/protection-jobs?filter=assetInfo/id eq {{vmId}}&select=assetInfo,id,operational,protections`
-`﻿``
+   ```shellsession
+   GET /backup-recovery/v1beta1/protection-jobs?filter=assetInfo/id eq {{vmId}}&select=assetInfo,id,operational,protections`
+   ```
 
 ![API to figure out protection-jobs](/img/api-to-figure-out-protection-jobs.png)
 
@@ -479,12 +479,14 @@ GET /backup-recovery/v1beta1/protection-jobs?filter=assetInfo/id eq {{vmId}}&sel
 
 3. The GreenLake API to accomplish the use case above was `POST /backup-recovery/v1beta1/protection-jobs/:id/run`, and the documentation of this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobRun) also list the required JSON structure for the request body. I created a JSON request body structure as the following:
 
-```json
-{
-   "﻿fullBackup": false,
-   "﻿ScheduleIds: [3]
-}
-````
+   ```
+   {
+      "﻿fullBackup": false,
+      "﻿ScheduleIds": [3]
+   }
+   ```
+
+
 
 > **Note** that there was a key called **“fullBackup”** inside the JSON request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. I also entered number 3 into **ScheduleIds** JSON array, to represent the cloud backup schedule. The below figure shows an example of the execution of **run now** without full backup protection of the third schedule which is cloud protection of this virtual machine. The value **<protection-jobs-id>** will be entered from the parameter of this API in this manner: `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`.
 
