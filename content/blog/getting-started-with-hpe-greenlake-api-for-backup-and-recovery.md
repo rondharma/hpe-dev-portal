@@ -11,6 +11,7 @@ tags:
   - data-services-cloud-console
 ---
 <style> li { font-size: 27px; line-height: 33px; max-width: none; } </style>
+
 ## W﻿hat's new?
 
 Recently, a new set of REST APIs for HPE GreenLake for Backup and Recovery Service was introduced in the HPE GreenLake Developer [website](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/). This is the third blog post from the series of blog postings ([Data-Services](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-data-services), [Virtualization](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-virtualization), [Backup and Recovery](https://developer.hpe.com/blogs/getting-started-with-hpe-greenlake-api-for-backup-and-recovery), and Private Cloud Business Edition) that introduce some useful tips and best practices about using this new set of APIs given a specific use case. 
@@ -266,12 +267,10 @@ The list of the steps to create this protection policy:
 
 7. The below figure shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids for different protection tiers that will be used for the next example.
 
-
 * **ID: “<protection-policies-id>"**
 * **SNAPSHOT: “<snapshot-protection-id>”**
 * **ON-PREMISES: “<onprem-protection-id>”**
 * **CLOUD: “<cloud-protection-id>”**
-
 
 > T﻿he full listing of the response body from `POST /backup-recovery/v1beta1/protection-policies` is shown in the below code snippet:
 
@@ -394,7 +393,9 @@ The list of the steps to create this protection policy:
 Next in the list of use cases for this blog post, I followed the progression for the day one activities. The next one is to protect a virtual machine which is applying this protection policy to a virtual machine (or any other assets). The steps required to apply the protection policy against a virtual machine are listed below:
 
 1. I obtained the values from **virtual machine id, name, and type** keys which were going to be used as the key-pair values required for the key **assetInfo** as shown in below figures. To obtain those, I used the HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/tag/virtual-machines/) for virtualization to discover the detail information of a virtual machine “0-Linux-Demo-VM02”. The API used for this: 
-```GET /virtualization/v1beta1/virtual-machines?sort=name desc&select=appType,id,name,type,guestInfo,protectionJobInfo&filter=name eq '0-Linux-Demo-VM02'
+
+```GET
+
 ```
 
 ![API to find virtual-machines and it's properties](/img/api-find-virtual-machines.png)
@@ -481,7 +482,7 @@ The below list detailed the required steps:
 }
 ```
 
-> **Note** that there was a key called **“fullBackup”** inside the JSON request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. I also entered number 3 into **ScheduleIds** JSON array, to represent the cloud backup schedule. The below figure shows an example of the execution of **run now** without full backup protection of the third schedule which is cloud protection of this virtual machine. The value **\<protection-jobs-id\>** will be entered from the parameter of this API in this manner: `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`.
+> **Note** that there was a key called **“fullBackup”** inside the JSON request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. I also entered number 3 into **ScheduleIds** JSON array, to represent the cloud backup schedule. The below figure shows an example of the execution of **run now** without full backup protection of the third schedule which is cloud protection of this virtual machine. The value **<protection-jobs-id>** will be entered from the parameter of this API in this manner: `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`.
 
 ![API to execute a protection run](/img/api-to-execute-a-protection.png)
 
@@ -509,9 +510,9 @@ GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-L
 
 ![API to obtain the backup Id of a cloud recovery point](/img/api-to-obtain-backup-id-for-recovery.png)
 
-3. Obtain the **datastore id** and the **cluster id** from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/DatastoresList) 'GET /virtualization/v1beta1/datastores`. The API used for this: `GET /virtualization/v1beta1/datastores?
-filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,id
-`
+3. Obtain the **datastore id** and the **cluster id** from the datastore that accommodate the datastore type that this VM can be restored, which is VMFS. In this hypervisor, I am using the datastore with the name “0-BRS-VMFS-Test3” and enter that as the filter into HPE GreenLake [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/DatastoresList) 'GET /virtualization/v1beta1/datastores`. The API used for this:`GET /virtualization/v1beta1/datastores?
+   filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,id
+   `
 
 ![API to obtain the cluster and datastore Ids](/img/api-obtain-cluster-and-datastore.png)
 
@@ -519,8 +520,10 @@ filter=displayName eq '0-BRS-VMFS-Test3'&select=clusterInfo,datastoreType,name,i
 
 ![API to get hypervisorId](/img/api-obtain-hypervisor-id.png)
 
-5. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/HypervisorNetwork/): `GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?
-select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'`.
+5. To set the virtual machine network to the correct network port group, I glanced into the existing virtual machine '0-Linux-Demo-V02', discovered the network port group “Mgmt-DPortGroup”, and obtained the network id. From the list of the network port group, I selected the associate port group of the virtual machine and copy the hypervisor-network-id using this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/virtualization/public/openapi/virtualization-public-v1beta1/operation/HypervisorNetwork/): 
+```shellsession
+GET /virtualization/v1beta1/hypervisor-managers/{{hyperVisorId}}/networks?select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'
+```
 
 ![API to get network ID for VM](/img/api-to-get-the-network-id.png)
 
@@ -529,6 +532,7 @@ select=id,displayName&filter=displayName eq 'Mgmt-DPortGroup'`.
 ![API to recover a cloud protection copy from a VM](/img/api-restoring-a-cloud-protection-recovery-point.png)
 
 7. To validate that the recovery was completed, and I tracked the progress from the response using the async-operations API as shown below. The API used for this: 
+
 ```shellsession
 GET /data-services/v1beta1/async-operations/:id?select=associatedResources,createdAt,endedAt,error,displayName,healthStatus,id,customerId,progressPercent,name,type,state
 ```
