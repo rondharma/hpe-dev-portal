@@ -147,7 +147,7 @@ A protection policy contain several JSON objects that are displayed in the below
 
 ![API request body JSON for protection policy creation](/img/api-body-json-request-for-protection-policies.png)
 
-﻿*The above figure shows the protection-policies request body JSON structure*
+﻿*The above figure shows the guide for protection-policies request body JSON structure*
 
 To simplify this example, I created a three-tier protection-policy for VMware as depicted by this snippet from the protection policy’s menu.
 
