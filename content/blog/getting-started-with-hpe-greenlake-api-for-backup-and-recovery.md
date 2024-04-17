@@ -125,7 +125,7 @@ The list of the steps to perform this use case using HPE GreenLake API:
 
 4. After roughly about 5 minutes, the cloud protection store was completely created based on response of the following `GET /data-services/async-operations` [API](https://developer.greenlake.hpe.com/docs/greenlake/services/data-services/public/openapi/data-services-public-v1beta1/operation/GetAsyncOperation/) as shown in the below figure. 
 
-   > ***Note:*** that I used a set of selection parameters in below figure to summarize the information from this task information: `GET /data-services/v1beta1/async-operations/{{taskId}}/select=associatedResources,createdAt,displayName,customerId,logMessages,progressPercent,state`.  I copied the task’s id from the response header’s location value of the prior API execution into a Postman’s variable called {{taskId}}, and incorporated {{taskId}} variable to the async-operations API execution. 
+> ***Note:*** that I used a set of selection parameters in below figure to summarize the information from this task information: `GET /data-services/v1beta1/async-operations/{{taskId}}/select=associatedResources,createdAt,displayName,customerId,logMessages,progressPercent,state`.  I copied the task’s id from the response header’s location value of the prior API execution into a Postman’s variable called {{taskId}}, and incorporated {{taskId}} variable to the async-operations API execution. 
 
 ![Task completion on POST protection-stores](/img/api-async-on-post-protection-stores.png)
 
@@ -463,8 +463,7 @@ Once the protection policy named "VMware create three tiers" was bound to the vi
 
 The below list detailed the required steps:
 
-1. I figured out the protection-job-id that is associated with “0-Linux-Demo-VM02.” and the  cloud backup schedule Id of the virtual machine. To achieve that, I used the HPE GreenLake [API](`https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList`) for Backup and Recovery `GET /backup-recovery/v1beta1/protection-jobs` and `filter “assetInfo/id eq {VM-id}”` as shown below. Note that the variable **{vmId}** contained the value of the virtual machine id as discovered in previous step, namely **"<virtual-machine-id>"**. The response body’s JSON structure contained the id of the protection job associated with **“0-Linux-Demo-VM02”**. From the same response body, I recognized that cloud protection is the **scheduleId no 3.**. The API used for this: 
-   `GET /backup-recovery/v1beta1/protection-jobs?filter=assetInfo/id eq {{vmId}}&select=assetInfo,id,operational,protections`. 
+1. I figured out the protection-job-id that is associated with “0-Linux-Demo-VM02.” and the  cloud backup schedule Id of the virtual machine. To achieve that, I used the HPE GreenLake [API](`https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobsList`) for Backup and Recovery `GET /backup-recovery/v1beta1/protection-jobs` and `filter “assetInfo/id eq {VM-id}”` as shown below. Note that the variable **{vmId}** contained the value of the virtual machine id as discovered in previous step, namely **"<virtual-machine-id>"**. The response body’s JSON structure contained the id of the protection job associated with **“0-Linux-Demo-VM02”**. From the same response body, I recognized that cloud protection is the **scheduleId no 3.**. The API used for this: `GET /backup-recovery/v1beta1/protection-jobs?filter=assetInfo/id eq {{vmId}}&select=assetInfo,id,operational,protections`. 
 
 ![API to figure out protection-jobs](/img/api-to-figure-out-protection-jobs.png)
 
@@ -473,10 +472,13 @@ The below list detailed the required steps:
 ![UI for run now protection jobs](/img/gui-run-now-cloud-protection.png)
 
 3. The GreenLake API to accomplish the use case above was `POST /backup-recovery/v1beta1/protection-jobs/:id/run`, and the documentation of this [API](https://developer.greenlake.hpe.com/docs/greenlake/services/backup-recovery/public/openapi/backup-recovery-public-v1beta1/operation/DataManagementJobRun) also list the required JSON structure for the request body. I created a JSON request body structure as the following:
-   `{
+
+```json
+{
    "﻿fullBackup": false,
    "﻿ScheduleIds: [3]
-   }`
+}
+```
 
 > **Note** that there was a key called **“fullBackup”** inside the JSON request body to enable the creation of full protection where a backup will be created independently from the existing copies in the protection store. I also entered number 3 into **ScheduleIds** JSON array, to represent the cloud backup schedule. The below figure shows an example of the execution of **run now** without full backup protection of the third schedule which is cloud protection of this virtual machine. The value **\<protection-jobs-id\>** will be entered from the parameter of this API in this manner: `POST /backup-recovery/v1beta1/protection-jobs/"<protection-jobs-id>"/run`.
 
@@ -492,9 +494,13 @@ The activities above were validated from the HPE GreenLake Backup and Recovery l
 
 ## Wow.. those were so cool! Can I recover a new virtual machine from that recovery point that I just created?
 
-Each of the recovery points regardless of the location of store (array snapshot, On-Premises Protection-Store, or HPE Cloud Protection-Store) can be recovered using this GreenLake API: `POST /backup-recovery/v1beta1/virtual-machines/:id/restore`
+Each of the recovery points regardless of the location of store (array snapshot, On-Premises Protection-Store, or HPE Cloud Protection-Store) can be recovered using this GreenLake API: `POST /backup-recovery/v1beta1/virtual-machines/:id/restore`.
 
-1. This API requires a request body of JSON structure as documented in the HPE GreenLake developer website. In this blog post, I planned a demo of the steps to recover the virtual machine from a copy that had existed in the HPE Cloud Protection Store into the VMware cluster where the Protection Storage Gateway is hosted (recover as a new virtual machine). The API used for this: `GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-Linux-Demo-VM02’&select=appType,id,name,type,guestinfo,protectionJobInfo`.
+1. This API requires a request body of JSON structure as documented in the HPE GreenLake developer website. In this blog post, I planned a demo of the steps to recover the virtual machine from a copy that had existed in the HPE Cloud Protection Store into the VMware cluster where the Protection Storage Gateway is hosted (recover as a new virtual machine). The API used for this: 
+
+```
+GET /virtualization/v1beta1/virtual-machines?sort=name desc&filter=name eq’0-Linux-Demo-VM02’&select=appType,id,name,type,guestinfo,protectionJobInfo
+```
 
 ![API to discover backup for recovery of VM](/img/api-to-discover-vm-for-recovery.png)
 
