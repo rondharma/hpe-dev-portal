@@ -269,12 +269,14 @@ The list of the steps to create this protection policy:
 
 7. The below figure shows the complete response JSON body from the above API that shows the construction of the protection policy with different protection tiers and the schedules associated with the protection tier. The important values were the ids for different protection tiers that will be used for the next example.
 
+
 * **ID: “<protection-policies-id>"**
 * **SNAPSHOT: “<snapshot-protection-id>”**
 * **ON-PREMISES: “<onprem-protection-id>”**
 * **CLOUD: “<cloud-protection-id>”**
 
-> T﻿he full listing of the response body from `POST /backup-recovery/v1beta1/protection-policies`.
+
+> T﻿he full listing of the response body from `POST /backup-recovery/v1beta1/protection-policies` is shown in the below code snippet:
 
 ```json
 {
