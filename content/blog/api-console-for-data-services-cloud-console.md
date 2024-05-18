@@ -16,7 +16,7 @@ tags:
 ---
 ## Secured, Yet Agile
 
-A major guiding principle in the creation of the Application Programming Interface (API) for Data Services Cloud Console from Hewlett Packard Enterprise (HPE) is security. However, to be able to be used by applications or tools that rely on the API to extend their features using the console, the API must also be flexible. To provide both security and flexibility, the console's REST API uses the 0Auth 2.0 authentication flow based on the client credential, which generates a limited lifetime access token. This access token is then embedded in the header of each REST API request as the authorization bearer.
+A major guiding principle in the creation of the Application Programming Interface (API) for HPE GreenLake edge-to-cloud platform is security. However, to be able to be used by client applications or client tools that rely on the API to extend their features using the HPE GreenLake platform, the API must also be flexible. To provide both security and flexibility, the console's REST API uses the 0Auth 2.0 authentication flow based on the client credential, which generates a limited lifetime access token. This access token is then embedded in the header of each REST API request as the authorization bearer.
 
 This blog will walk through the essential steps required to exercise or experiment with the Data Services Cloud Console REST API.
 
@@ -203,4 +203,3 @@ The response is returned in the form of JSON string, as shown in the below examp
 The recommended tool at this moment of time to experiment with the REST API for the console is the Postman which is downloadable from the [Postman website](https://www.postman.com/downloads/). The postman is a versatile tool, that anyone can copy the access token (or better to use the client id and client secret) from the API Gateway menu and issue a REST API request without using programming language. Furthermore, user can also test the parameters and format the responses of each REST API request using the Postman tool.
 
 In conclusion, this blog gives you a great example on how to obtain the access token and experiment with the Data Services Cloud Console REST API. Please take a look at the next blog on getting the access token programmatically to enable any client application using any familiar tool like Postman, use a programming, or a scripting language.
-
