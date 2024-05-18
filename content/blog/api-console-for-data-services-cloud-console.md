@@ -32,9 +32,9 @@ In situation where an HPE GreenLake user is aware that security of the client cr
 
 When the client application access to the HPE GreenLake API of data services on HPE GreenLake platform must be disabled, a user can delete the HPE GreenLake API client credential associated with client id and client secret in the API Gateway menu.
 
-At March 2024, the client application can use a single access token to access all of the family of data services on HPE GreenLake platform in one region of 
+At March 2024, the client application can use a single access token to access all of the family of data services on HPE GreenLake platform in the region where the client credential was generated. So in practice, client application can execute any HPE GreenLake APIs' resources from HPE GreenLake Private Cloud Business Edition, HPE GreenLake for Disaster Recovery, HPE GreenLake for Backup and Recovery and many other resources.
 
-The following flow chart describes steps required to perform the console's REST API request. The flow starts from the GreenLake authorized user creating the client id and client secret to be used to obtain the access token. The access token will be used in the authorization bearer to ensure the secure REST API request. 
+The following flow chart describes steps required to execute HPE GreenLake API request. The flow starts from the GreenLake authorized user creating the client id and client secret to be used to obtain the access token. The access token will be used in the authorization bearer to ensure the secure REST API request. 
 
 ![Access API process](/img/user-guide-for-authorization.png "Process to authenticate and to obtain secure access ")
 
