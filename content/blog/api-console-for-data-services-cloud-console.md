@@ -16,13 +16,12 @@ tags:
 ---
 ## Secured, Yet Agile
 
-A major guiding principle in the creation of the Application Programming Interface (API) for HPE GreenLake edge-to-cloud platform is security. However, to support numbers of client applications or client tools that rely on the HPE GreenLake API to extend their features, the API must also be flexible. To provide both security and flexibility, the HPE GreenLake API uses the 0Auth 2.0 authentication flow based on the client credential, which generates a limited lifetime access token. This access token is then embedded in the header of each REST API request as the authorization bearer.
+A major guiding principle in the creation of the Application Programming Interface (API) for HPE GreenLake edge-to-cloud platform is security. However, to support major client applications, the HPE GreenLake APIs must also be flexible. To provide both security and flexibility, the HPE GreenLake API uses the 0Auth 2.0 authentication flow based on the client credentials. After the client application authenticate itself using the client credentials, the application will receive a limited lifetime access token. This access token will then be embedded in the header of each HPE GreenLake REST API call for authorization.
 
 This blog will walk through the essential steps required to exercise or to experiment with the HPE GreenLake APIs for data services on HPE GreenLake platform.
 
 ### Authentication Process to Obtain the Access Token
 
-The public HPE GreenLake API relies on an OAuth 2.0 third party authorization framework on behalf of the resource owner (HPE GreenLake's user) for security. The user starts by logging and authenticating into HPE GreenLake platform, which is authenticated by the Identity Provider (validated through username, password, or Multi Factor Authentication). Using the API gateway menu in the HPE GreenLake platform, customer can obtain the authorization to the client application (REST API client) by obtaining the OAuth 2.0 API client credentials (client id and client secret). This association allows the user to obtain the proper access token from the menu, and the user can then embed the access token inside the token bearer field (header) with any HPE GreenLake REST API request for data services on HPE GreenLake platform. This associations allows the authorized client application or script to securely execute any HPE GreenLake API to the approved instances of data service on the HPE GreenLake platform.
 
 ![client-credential application flow](/img/greenlake-api-access-flow.png "obtain client-id and client-secret")
 
