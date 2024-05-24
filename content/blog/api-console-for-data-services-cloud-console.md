@@ -18,12 +18,10 @@ tags:
 
 A major guiding principle in the creation of the Application Programming Interface (API) for HPE GreenLake edge-to-cloud platform is security. However, to support major client applications, the HPE GreenLake APIs must also be flexible. To provide both security and flexibility, the HPE GreenLake API uses the OAuth 2.0 authentication based on the Client Credentials Flow.
 
-This blog will walk through the essential steps required to exercise or to experiment with the HPE GreenLake APIs for data services on HPE GreenLake platform.
+This blog will walk through the essential steps required to exercise or to experiment with the HPE GreenLake APIs for Data Services on HPE GreenLake edge-to-cloud platform.
 
 ### Authentication Process to Obtain the Access Token
-The authorization for the client application
-
-After the client application authenticate itself using the client credentials, the application will receive a limited lifetime access token. This access token will then be embedded in the header of each HPE GreenLake REST API call for authorization.
+The authorization for the client application is provided by HPE GreenLake user who has the authority to access services. After the client application authenticate itself using the client credentials, the application will receive a limited lifetime access token. This access token will then be embedded in the header of each HPE GreenLake REST API call for authorization.
 
 ![client-credential application flow](/img/greenlake-api-access-flow.png "obtain client-id and client-secret")
 
